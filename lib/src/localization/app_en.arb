@@ -1,0 +1,6 @@
+{
+  "appTitle": "express_all",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
