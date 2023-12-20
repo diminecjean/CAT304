@@ -10,7 +10,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Express All',
       home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Express All'),
+          centerTitle: true,
+        ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -25,7 +30,7 @@ class MyApp extends StatelessWidget {
                 TextField(
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.yellowAccent,
+                    fillColor: const Color(0xFFFFE894),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                       borderSide: BorderSide.none,
@@ -39,7 +44,7 @@ class MyApp extends StatelessWidget {
                   obscureText: true,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.yellowAccent,
+                    fillColor: const Color(0xFFFFE894),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                       borderSide: BorderSide.none,
@@ -56,7 +61,7 @@ class MyApp extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: const Color(0xFFFF9051),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -68,7 +73,10 @@ class MyApp extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => const SignInPage()),
                     );
                   },
-                  child: const Text('Sign In'),
+                  child: const Text(
+                    'Sign In',
+                    style: TextStyle(color: Color(0xFFFFFFFF)),
+                  ),
                 ),
                 const SizedBox(height: 20),
                 TextButton(
@@ -78,7 +86,7 @@ class MyApp extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
+                    backgroundColor: const Color(0xFFF5F1E9),
                     foregroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
