@@ -1,4 +1,11 @@
+import 'package:express_all/src/config/config_color.dart';
+import 'package:express_all/src/pages/home_page.dart';
+import 'package:express_all/src/pages/login_page.dart';
+import 'package:express_all/src/pages/onboarding_page.dart';
+import 'package:express_all/src/pages/signup_page.dart';
+
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,126 +18,62 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Express All',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Express All'),
-          centerTitle: true,
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'ICON',
-                  style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 50),
-                TextField(
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: const Color(0xFFFFE894),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    prefixIcon: Icon(Icons.person),
-                    hintText: 'Username',
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: const Color(0xFFFFE894),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    prefixIcon: Icon(Icons.lock),
-                    hintText: 'Password',
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('Forgot your password?'),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFFF9051),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    minimumSize: Size(double.infinity, 50), // double.infinity is the width and 50 is the height
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SignInPage()),
-                    );
-                  },
-                  child: const Text(
-                    'Sign In',
-                    style: TextStyle(color: Color(0xFFFFFFFF)),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('Don\'t have an account yet? Create one now!'),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFF5F1E9),
-                    foregroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    minimumSize: Size(double.infinity, 50),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const CreateAccountPage()),
-                    );
-                  },
-                  child: const Text('Create Account'),
-                ),
-              ],
-            ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: ConfigColor.getMaterialColor(Color(0xFF8F312C)),
+        // textTheme: GoogleFonts.robotoTextTheme(
+        //   Theme.of(context).textTheme,
+        // ),
+        // primarySwatch: ConfigColor.getMaterialColor(Color(0xFF8F312C)),
+        //TODO
+        textTheme: TextTheme(
+          displayLarge: TextStyle(
+            fontSize: 32.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'YourHeadingFont', // Replace with your heading font
+            color: Colors.black, // Change to your preferred color
           ),
+          displayMedium: TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'YourTitleFont', // Replace with your title font
+            color: Colors.black87, // Change to your preferred color
+          ),
+          // Add more text styles for different types of text here
         ),
       ),
+      initialRoute: '/onboarding',
+      routes: <String, WidgetBuilder>{
+        '/onboarding': (BuildContext context) => OnBoardingPage(),
+        '/login': (BuildContext context) => LoginPage(),
+        '/signup': (BuildContext context) => SignUpPage(),
+        '/home': (BuildContext context) => HomePage()
+      },
     );
   }
 }
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+// class SignInPage extends StatelessWidget {
+//   const SignInPage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Sign In')),
-      body: Center(child: Text('Welcome to the Sign In Page')),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Sign In')),
+//       body: Center(child: Text('Welcome to the Sign In Page')),
+//     );
+//   }
+// }
 
-class CreateAccountPage extends StatelessWidget {
-  const CreateAccountPage({Key? key}) : super(key: key);
+// class CreateAccountPage extends StatelessWidget {
+//   const CreateAccountPage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Create Account')),
-      body: Center(child: Text('Welcome to the Create Account Page')),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Create Account')),
+//       body: Center(child: Text('Welcome to the Create Account Page')),
+//     );
+//   }
+// }
 

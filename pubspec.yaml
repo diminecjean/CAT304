@@ -14,7 +14,8 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  introduction_screen: ^3.1.8
+  flutter_onboarding_slider: ^1.0.11
+  google_fonts: ^4.0.4
 
 dev_dependencies:
   flutter_test:
