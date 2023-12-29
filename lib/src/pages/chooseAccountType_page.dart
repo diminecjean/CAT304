@@ -16,7 +16,7 @@ class ChooseAccountTypePage extends StatelessWidget {
         children: <Widget>[
           const Text(
             'I am a ...',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold), //
           ),
           const SizedBox(height: 30),
           const Row(
@@ -51,7 +51,7 @@ class OptionCard extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: () {
-          // Handle tap
+          Navigator.pushNamed(context, "/signup");                                            // TODO: Here should separate difference account type signup, currently both are the same signup page
         },
         splashColor: Theme.of(context).splashColor, // Default splash color
         child: Container(
