@@ -1,73 +1,66 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import '../components/custom_text_field.dart';
-import '../config/config_color.dart';
-import '../config/style/style.dart';
-
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
-
-  @override
-  State<SignUpPage> createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
+class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-          title: Text("Sign Up", style: Style.pageName()),
-          automaticallyImplyLeading: false),
-      body: SingleChildScrollView(
+        leading: BackButton(),
+        title: Text('Create a parent account'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 60.0),
-              child: Center(
-                child: Container(
-                  width: 400,
-                  height: 250,
-                  child: Image(
-                    image: AssetImage('static/images/Log In Picture.png'),
-                    width: 250,
-                  ),
-                ),
-              ),
-            ),
-            CustomTextField(
-                labelText: 'Email',
-                hintText: 'Enter a valid email. E.g. abc@gmail.com'),
-            CustomTextField(
-              labelText: 'Password',
-              hintText: 'Enter secure password',
-              obscureText: true,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 30),
-              height: 50,
-              width: 180,
-              decoration: BoxDecoration(
-                  color: ConfigColor.getMaterialColor(Color(0xFF22541D)),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Center(
-                  child: Text(
-                'Sign Up',
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              )),
-            ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildTextField(context, icon: Icons.person, label: 'Username'),
+            SizedBox(height: 16),
+            _buildTextField(context, icon: Icons.phone, label: 'Phone'),
+            SizedBox(height: 16),
+            _buildTextField(context, icon: Icons.email, label: 'Email'),
+            SizedBox(height: 16),
+            _buildTextField(context, icon: Icons.lock, label: 'Password', obscureText: true),
+            SizedBox(height: 16),
+            _buildTextField(context, icon: Icons.lock, label: 'Confirm password', obscureText: true),
+            SizedBox(height: 32),
             SizedBox(
-              height: 80,
-            ),
-            GestureDetector(
-              child: Text("Already have an account? Log in here."),
-              onTap: () => Navigator.pushNamed(context, "/login"),
+              width: double.infinity, // Match parent width
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.orange, // Background color
+                  onPrimary: Colors.white, // Text color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 16.0), // Padding inside the button
+                ),
+                onPressed: () {
+                  // TODO: Implement sign-up logic
+                },
+                child: Text('Create Account'),
+              ),
             ),
           ],
         ),
       ),
     );
   }
+
+  Widget _buildTextField(BuildContext context, {required IconData icon, required String label, bool obscureText = false}) {
+    return TextField(
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.yellow[100], // Change this to match your color
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          borderSide: BorderSide.none,
+        ),
+        prefixIcon: Icon(icon, color: Colors.grey[600]), // Change this to match your color
+        labelText: label,
+      ),
+    );
+  }
 }
+
