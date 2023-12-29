@@ -3,6 +3,7 @@ import 'package:express_all/src/pages/home_page.dart';
 import 'package:express_all/src/pages/login_page.dart';
 import 'package:express_all/src/pages/onboarding_page.dart';
 import 'package:express_all/src/pages/signup_page.dart';
+import 'package:express_all/src/pages/chooseAccountType_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,8 +26,8 @@ class MyApp extends StatelessWidget {
         //   Theme.of(context).textTheme,
         // ),
         // primarySwatch: ConfigColor.getMaterialColor(Color(0xFF8F312C)),
-        //TODO
-        textTheme: TextTheme(
+        // TODO
+        textTheme: const TextTheme(
           displayLarge: TextStyle(
             fontSize: 32.0,
             fontWeight: FontWeight.bold,
@@ -47,7 +48,8 @@ class MyApp extends StatelessWidget {
         '/onboarding': (BuildContext context) => OnBoardingPage(),
         '/login': (BuildContext context) => LoginPage(),
         '/signup': (BuildContext context) => SignUpPage(),
-        '/home': (BuildContext context) => HomePage()
+        '/home': (BuildContext context) => HomePage(),
+        '/chooseAccountType': (BuildContext context) => ChooseAccountTypePage()
       },
     );
   }

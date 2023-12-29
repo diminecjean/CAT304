@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  minimumSize: Size(double.infinity,
+                  minimumSize: const Size(double.infinity,
                       50), // double.infinity is the width and 50 is the height
                 ),
                 //TODO: change navigation
@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                   minimumSize: Size(double.infinity, 50),
                 ),
                 child: const Text('Create Account'),
-                onPressed: () => Navigator.pushNamed(context, "/signup"),
+                onPressed: () => Navigator.pushNamed(context, "/chooseAccountType"),
               ),
             ],
           ),

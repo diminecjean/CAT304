@@ -17,10 +17,10 @@ class OnBoardingPage extends StatelessWidget {
       onFinish: () {
         Navigator.pushNamed(context, "/login");
       },
-      finishButtonStyle: FinishButtonStyle(
+      finishButtonStyle: const FinishButtonStyle(
         backgroundColor: Color.fromARGB(255, 143, 49, 44),
       ),
-      skipTextButton: Text(
+      skipTextButton: const Text(
         'Skip',
         style: TextStyle(
           fontSize: 16,
@@ -28,8 +28,8 @@ class OnBoardingPage extends StatelessWidget {
           fontWeight: FontWeight.w600,
         ),
       ),
-      pageBackgroundColor: Color.fromARGB(255, 245, 241, 233),
-      headerBackgroundColor: Color.fromARGB(255, 245, 241, 233),
+      pageBackgroundColor: const Color.fromARGB(255, 245, 241, 233),
+      headerBackgroundColor: const Color.fromARGB(255, 245, 241, 233),
       background: [
         Image.asset(
           'assets/images/onboarding-1.png',
@@ -62,7 +62,7 @@ class OnBoardingPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 360,
               ),
               OnboardingText(
@@ -76,7 +76,7 @@ class OnBoardingPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 360,
               ),
               OnboardingText(
@@ -90,7 +90,7 @@ class OnBoardingPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 360,
               ),
               OnboardingText(
@@ -104,7 +104,7 @@ class OnBoardingPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 360,
               ),
               OnboardingText(
@@ -118,7 +118,7 @@ class OnBoardingPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 360,
               ),
               OnboardingText(
