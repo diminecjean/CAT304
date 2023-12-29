@@ -22,8 +22,8 @@ class ChooseAccountTypePage extends StatelessWidget {
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              OptionCard(label: 'Parent', svgAsset: 'assets/images/parents.svg'),
-              OptionCard(label: 'Child', svgAsset: 'assets/images/children.svg'),
+              OptionCard(label: 'Parent', imagePath: 'assets/images/parents.png'),
+              OptionCard(label: 'Child', imagePath: 'assets/images/children.png'),
             ],
           ),
           const Spacer(),
@@ -31,7 +31,7 @@ class ChooseAccountTypePage extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: SvgPicture.asset('assets/images/family_together.svg'), // Replace with your asset image
+              child: SvgPicture.asset('assets/images/svg/family_together.svg'), // Replace with your asset image
             ),
           ),
         ],
@@ -42,9 +42,9 @@ class ChooseAccountTypePage extends StatelessWidget {
 
 class OptionCard extends StatelessWidget {
   final String label;
-  final String svgAsset;
+  final String imagePath;
 
-  const OptionCard({Key? key, required this.label, required this.svgAsset}) : super(key: key);
+  const OptionCard({Key? key, required this.label, required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +60,7 @@ class OptionCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SvgPicture.asset(
-                svgAsset,
-                height: 48, // Specify the height of the SVG
-                width: 48, // Specify the width of the SVG
-              ),
+              Image.asset(imagePath, width: 48, height: 48),
               const SizedBox(height: 10), // Spacing between icon and text
               Text(label), // Text label for the card
             ],
