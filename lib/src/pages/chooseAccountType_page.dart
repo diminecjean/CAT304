@@ -48,11 +48,12 @@ class OptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // Handle tap
-      },
-      child: Card(
+    return Card(
+      child: InkWell(
+        onTap: () {
+          // Handle tap
+        },
+        splashColor: Theme.of(context).splashColor, // Default splash color
         child: Container(
           width: 120, // Define a fixed width for the card
           height: 120, // Define a fixed height for the card
@@ -60,8 +61,8 @@ class OptionCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset(imagePath, width: 48, height: 48),
-              const SizedBox(height: 10), // Spacing between icon and text
+              Image.asset(imagePath, width: 48, height: 48), // Display the image
+              const SizedBox(height: 10), // Spacing between image and text
               Text(label), // Text label for the card
             ],
           ),
@@ -70,3 +71,4 @@ class OptionCard extends StatelessWidget {
     );
   }
 }
+
