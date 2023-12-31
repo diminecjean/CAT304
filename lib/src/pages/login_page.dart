@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                   minimumSize: Size(double.infinity, 50),
                 ),
                 child: const Text('Create Account'),
-                onPressed: () => Navigator.pushNamed(context, "/chooseAccountType"),
+                onPressed: () => Navigator.pushNamed(context, "/ChooseAccountType"),
               ),
             ],
           ),

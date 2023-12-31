@@ -4,6 +4,7 @@ import 'package:express_all/src/pages/login_page.dart';
 import 'package:express_all/src/pages/onboarding_page.dart';
 import 'package:express_all/src/pages/signup_page.dart';
 import 'package:express_all/src/pages/chooseAccountType_page.dart';
+import 'package:express_all/src/pages/signup_children_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,13 +44,14 @@ class MyApp extends StatelessWidget {
           // Add more text styles for different types of text here
         ),
       ),
-      initialRoute: '/onboarding',
+      initialRoute: '/Onboarding',
       routes: <String, WidgetBuilder>{
-        '/onboarding': (BuildContext context) => OnBoardingPage(),
-        '/login': (BuildContext context) => LoginPage(),
-        '/signup': (BuildContext context) => SignUpPage(),
-        '/home': (BuildContext context) => HomePage(),
-        '/chooseAccountType': (BuildContext context) => ChooseAccountTypePage()
+        '/Onboarding': (BuildContext context) => const OnBoardingPage(),
+        '/Login': (BuildContext context) => const LoginPage(),
+        '/ParentSignUp': (BuildContext context) => ParentSignUpPage(),
+        '/ChildSignUp': (BuildContext context) => ChildSignUpPage(),
+        '/Home': (BuildContext context) => HomePage(),
+        '/ChooseAccountType': (BuildContext context) => ChooseAccountTypePage()
       },
     );
   }

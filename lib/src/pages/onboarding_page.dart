@@ -15,7 +15,7 @@ class OnBoardingPage extends StatelessWidget {
     return OnBoardingSlider(
       finishButtonText: 'Login',
       onFinish: () {
-        Navigator.pushNamed(context, "/login");
+        Navigator.pushNamed(context, "/Login");
       },
       finishButtonStyle: const FinishButtonStyle(
         backgroundColor: Color.fromARGB(255, 143, 49, 44),

@@ -22,8 +22,8 @@ class ChooseAccountTypePage extends StatelessWidget {
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              OptionCard(label: 'Parent', imagePath: 'assets/images/parents.png'),
-              OptionCard(label: 'Child', imagePath: 'assets/images/children.png'),
+              OptionCard(label: 'Parent', imagePath: 'assets/images/parents.png', routeName: '/ParentSignUp',),
+              OptionCard(label: 'Child', imagePath: 'assets/images/children.png', routeName: '/ChildSignUp'),
             ],
           ),
           const Spacer(),
@@ -43,15 +43,21 @@ class ChooseAccountTypePage extends StatelessWidget {
 class OptionCard extends StatelessWidget {
   final String label;
   final String imagePath;
+  final String routeName;
 
-  const OptionCard({Key? key, required this.label, required this.imagePath}) : super(key: key);
+  const OptionCard({
+    Key? key,
+    required this.label,
+    required this.imagePath,
+    required this.routeName
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, "/signup");                                            // TODO: Here should separate difference account type signup, currently both are the same signup page
+          Navigator.pushNamed(context, routeName);            // TODO: Here should separate difference account type signup, currently both are the same signup page
         },
         splashColor: Theme.of(context).splashColor, // Default splash color
         child: Container(
