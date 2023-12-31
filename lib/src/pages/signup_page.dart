@@ -33,10 +33,10 @@ class ParentSignUpPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 16.0), // Padding inside the button
+                  padding: const EdgeInsets.symmetric(vertical: 16.0), // Padding inside the button
                 ),
                 onPressed: () {
-                  // TODO: Implement sign-up logic
+                  Navigator.pushNamed(context, '/AddChild');
                 },
                 child: const Text('Create Account'),
               ),

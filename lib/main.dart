@@ -1,10 +1,12 @@
 import 'package:express_all/src/config/config_color.dart';
+import 'package:express_all/src/pages/addChild_page.dart';
 import 'package:express_all/src/pages/home_page.dart';
 import 'package:express_all/src/pages/login_page.dart';
 import 'package:express_all/src/pages/onboarding_page.dart';
 import 'package:express_all/src/pages/signup_page.dart';
 import 'package:express_all/src/pages/chooseAccountType_page.dart';
 import 'package:express_all/src/pages/signup_children_page.dart';
+import 'package:express_all/src/pages/addChild_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,7 +53,8 @@ class MyApp extends StatelessWidget {
         '/ParentSignUp': (BuildContext context) => ParentSignUpPage(),
         '/ChildSignUp': (BuildContext context) => ChildSignUpPage(),
         '/Home': (BuildContext context) => HomePage(),
-        '/ChooseAccountType': (BuildContext context) => ChooseAccountTypePage()
+        '/ChooseAccountType': (BuildContext context) => const ChooseAccountTypePage(),
+        '/AddChild': (BuildContext context) => AddChildPage()
       },
     );
   }
