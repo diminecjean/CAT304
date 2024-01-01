@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 20),
               TextButton(
-                onPressed: () {},
+                onPressed: () {Navigator.pushNamed(context, '/Home');},
                 child:
                     const Text('Don\'t have an account yet? Create one now!'),
               ),

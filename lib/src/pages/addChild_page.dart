@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+// TODO: should have a skip button
+// TODO: should have a backward button
 class AddChildPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,8 +34,8 @@ class AddChildPage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.orange, // Button background color
-                onPrimary: Colors.white, // Button text color
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.orange, // Button text color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
@@ -54,8 +55,8 @@ class AddChildPage extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.white, // Button background color
-                onPrimary: Colors.black, // Button text color
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.white, // Button text color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
