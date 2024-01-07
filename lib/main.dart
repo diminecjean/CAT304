@@ -6,7 +6,7 @@ import 'package:express_all/src/pages/onboarding_page.dart';
 import 'package:express_all/src/pages/signup_page.dart';
 import 'package:express_all/src/pages/chooseAccountType_page.dart';
 import 'package:express_all/src/pages/signup_children_page.dart';
-import 'package:express_all/src/pages/addChild_page.dart';
+import 'package:express_all/src/pages/main_menu_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -54,7 +54,8 @@ class MyApp extends StatelessWidget {
         '/ChildSignUp': (BuildContext context) => ChildSignUpPage(),
         '/Home': (BuildContext context) => HomePage(),
         '/ChooseAccountType': (BuildContext context) => const ChooseAccountTypePage(),
-        '/AddChild': (BuildContext context) => AddChildPage()
+        '/AddChild': (BuildContext context) => AddChildPage(),
+        '/MainMenu': (BuildContext context) => MainMenuPage(),
       },
     );
   }
