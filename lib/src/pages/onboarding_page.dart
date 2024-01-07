@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../components/text_bubble.dart';
 import '../components/onboarding_text.dart';
+import '../config/style/constants.dart';
 // import 'package:flutter/services.dart';
 
 class OnBoardingPage extends StatelessWidget {
@@ -13,18 +11,30 @@ class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnBoardingSlider(
+      controllerColor: primaryColor,
       finishButtonText: 'Login',
       onFinish: () {
         Navigator.pushNamed(context, "/Login");
       },
-      finishButtonStyle: const FinishButtonStyle(
-        backgroundColor: Color.fromARGB(255, 143, 49, 44),
+      finishButtonStyle: FinishButtonStyle(
+        backgroundColor: Theme.of(context).primaryColor,
       ),
-      skipTextButton: const Text(
+      trailing: Text(
+        'Sign Up',
+        style: TextStyle(
+          fontSize: 16,
+          color: Theme.of(context).primaryColor,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      trailingFunction: () {
+        Navigator.pushNamed(context, "/ChooseAccountType");
+      },
+      skipTextButton: Text(
         'Skip',
         style: TextStyle(
           fontSize: 16,
-          color: Color.fromARGB(255, 143, 49, 44),
+          color: Theme.of(context).primaryColor,
           fontWeight: FontWeight.w600,
         ),
       ),
