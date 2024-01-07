@@ -17,12 +17,12 @@ class OnboardingText extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(children: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text(
               inputTextTitle,
               textAlign: TextAlign.center,
               style: GoogleFonts.roboto(
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   color: Color.fromARGB(255, 143, 49, 44),
                   fontSize: 24.0,
                   fontWeight: FontWeight.w700,
@@ -31,12 +31,12 @@ class OnboardingText extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text(
               inputTextContent,
               textAlign: TextAlign.center,
               style: GoogleFonts.roboto(
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   color: Color.fromARGB(255, 143, 49, 44),
                   fontSize: 16.0,
                   fontWeight: FontWeight.w300,
