@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 // TODO: should have a skip button
 // TODO: should have a backward button
 class AddChildPage extends StatelessWidget {
+  const AddChildPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +41,7 @@ class AddChildPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
-                minimumSize: Size(double.infinity, 50), // Button width and height
+                minimumSize: const Size(double.infinity, 50), // Button width and height
               ),
               onPressed: () {
                 // Action to add the child
@@ -60,13 +62,13 @@ class AddChildPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
-                side: BorderSide(color: Colors.orange), // Border color
-                minimumSize: Size(double.infinity, 50), // Button width and height
+                side: const BorderSide(color: Colors.orange), // Border color
+                minimumSize: const Size(double.infinity, 50), // Button width and height
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/ChildSignUp');
               },
-              child: Text('Create Child Account'),
+              child: const Text('Create Child Account'),
             ),
           ],
         ),

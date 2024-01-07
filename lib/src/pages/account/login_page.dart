@@ -1,10 +1,5 @@
-import 'package:express_all/src/components/custom_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
-import '../config/config_color.dart';
-import '../config/style/style.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -40,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(30.0),
                     borderSide: BorderSide.none,
                   ),
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: const Icon(Icons.person),
                   hintText: 'Username',
                 ),
               ),
@@ -54,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(30.0),
                     borderSide: BorderSide.none,
                   ),
-                  prefixIcon: Icon(Icons.lock),
+                  prefixIcon: const Icon(Icons.lock),
                   hintText: 'Password',
                 ),
               ),
@@ -74,7 +69,8 @@ class _LoginPageState extends State<LoginPage> {
                       50), // double.infinity is the width and 50 is the height
                 ),
                 //TODO: change navigation
-                onPressed: () => Navigator.pushNamed(context, "/signup"),
+                onPressed: () =>
+                    Navigator.pushNamed(context, "/FacialExpression"),
                 child: const Text(
                   'Sign In',
                   style: TextStyle(color: Color(0xFFFFFFFF)),
@@ -82,7 +78,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 20),
               TextButton(
-                onPressed: () {Navigator.pushNamed(context, '/Home');},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/Home');
+                },
                 child:
                     const Text('Don\'t have an account yet? Create one now!'),
               ),
@@ -95,10 +93,11 @@ class _LoginPageState extends State<LoginPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  minimumSize: Size(double.infinity, 50),
+                  minimumSize: const Size(double.infinity, 50),
                 ),
                 child: const Text('Create Account'),
-                onPressed: () => Navigator.pushNamed(context, "/ChooseAccountType"),
+                onPressed: () =>
+                    Navigator.pushNamed(context, "/ChooseAccountType"),
               ),
             ],
           ),

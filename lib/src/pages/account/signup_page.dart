@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class ParentSignUpPage extends StatelessWidget {
+  const ParentSignUpPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
