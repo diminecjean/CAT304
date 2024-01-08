@@ -4,6 +4,7 @@ import 'package:express_all/src/config/style/constants.dart';
 import 'package:express_all/src/controllers/question_controller.dart';
 import 'package:flutter_svg/svg.dart';
 
+// TODO: fix score calculation
 class ScoreScreen extends StatelessWidget {
   const ScoreScreen({Key? key}) : super(key: key);
 
