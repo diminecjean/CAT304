@@ -1,7 +1,7 @@
 import 'package:express_all/src/config/config_color.dart';
 import 'package:express_all/src/pages/account/addChild_page.dart';
-import 'package:express_all/src/pages/home_page.dart';
 import 'package:express_all/src/pages/account/login_page.dart';
+import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
 import 'package:express_all/src/pages/main_menu_page.dart';
 import 'package:express_all/src/pages/onboarding_page.dart';
 import 'package:express_all/src/pages/account/signup_page.dart';
@@ -61,12 +61,13 @@ class MyApp extends StatelessWidget {
         '/Login': (BuildContext context) => const LoginPage(),
         '/ParentSignUp': (BuildContext context) => const ParentSignUpPage(),
         '/ChildSignUp': (BuildContext context) => const ChildSignUpPage(),
-        '/Home': (BuildContext context) => const HomePage(),
-        '/ChooseAccountType': (BuildContext context) => const ChooseAccountTypePage(),
+        '/ChooseAccountType': (BuildContext context) =>
+            const ChooseAccountTypePage(),
         '/MainMenu': (BuildContext context) => const MainMenuPage(),
         '/AddChild': (BuildContext context) => const AddChildPage(),
-        '/FacialExpression': (BuildContext context) => const FacialExpressionPage(),
-
+        '/FacialExpression': (BuildContext context) =>
+            const FacialExpressionPage(),
+        '/ScoreScreen': (BuildContext context) => const ScoreScreen(),
       },
     );
   }
