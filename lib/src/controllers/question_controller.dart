@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:logger/logger.dart';
 import 'package:get/get.dart';
 import 'package:express_all/src/models/Questions.dart';
 import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
@@ -96,21 +98,14 @@ class QuestionController extends GetxController
       _isAnswered = false;
       _pageController.nextPage(
           duration: const Duration(milliseconds: 150), curve: Curves.ease);
-    } else {
-      // Get package provide us simple way to naviigate another page
-      Get.to(const ScoreScreen());
     }
   }
 
-  // write a function that returns to the previous question
   void previousQuestion() {
     if (_questionNumber.value != 1) {
       _isAnswered = false;
       _pageController.previousPage(
           duration: const Duration(milliseconds: 150), curve: Curves.ease);
-    } else {
-      // Get package provide us simple way to naviigate another page
-      Get.to(const ScoreScreen());
     }
   }
 
