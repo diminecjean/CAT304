@@ -82,7 +82,7 @@ class MainMenuPage extends StatelessWidget {
                 child: MenuCard(
                   title: 'Ready to learn?',
                   onTap: () {
-                    // Action to navigate to learning activity
+                    Navigator.pushNamed(context, "/FacialExpression");
                   },
                   imagePath: 'assets/images/menu_1.png', // Replace with your asset image path
                 ),
@@ -91,7 +91,7 @@ class MainMenuPage extends StatelessWidget {
                 child: MenuCard(
                   title: 'Emotion and Gesture Recognition Practice',
                   onTap: () {
-                    // Action to navigate to Emotion and Gesture Recognition Practice
+                    Navigator.pushNamed(context, "/FacialExpression");
                   },
                   imagePath: 'assets/images/menu_2.png', // Replace with your asset image path
                 ),

@@ -1,7 +1,5 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Style {
   static TextStyle cancelButtonTextStyle() {
@@ -19,7 +17,7 @@ class Style {
 
   static ButtonStyle acceptButtonStyle() {
     return ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 17, 87, 21));
+        backgroundColor: const Color.fromARGB(255, 17, 87, 21));
   }
 
   static TextStyle pageName() {
