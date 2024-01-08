@@ -1,8 +1,10 @@
 import 'package:express_all/src/components/quiz/body.dart';
 import 'package:express_all/src/config/style/constants.dart';
 import 'package:express_all/src/controllers/question_controller.dart';
+import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 class FacialExpressionPage extends StatelessWidget {
   const FacialExpressionPage({super.key});
@@ -64,63 +66,6 @@ class FacialExpressionPage extends StatelessWidget {
   }
 }
 
-// class FacialExpressionExercise extends StatefulWidget {
-//   const FacialExpressionExercise({Key? key}) : super(key: key);
-//   @override
-//   _FacialExpressionExerciseState createState() =>
-//       _FacialExpressionExerciseState();
-// }
-
-// class _FacialExpressionExerciseState extends State<FacialExpressionExercise> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Facial Expression Identification'),
-//         centerTitle: true,
-//       ),
-//       body: SafeArea(
-//         child: Container(
-//           margin: const EdgeInsets.all(20),
-//           padding: const EdgeInsets.all(20),
-//           child: Column(
-//             children: <Widget>[
-//               Text(
-//                 'Facial Expression Identification',
-//                 style: TextStyle(
-//                     fontSize: 24,
-//                     fontWeight: FontWeight.w700,
-//                     color: Theme.of(context).primaryColor),
-//                 textAlign: TextAlign.center,
-//               ),
-//               Image.asset(
-//                 'assets/images/facial_expression-1.png',
-//                 height: 350,
-//               ),
-//               Text(
-//                 'What is the facial expression of the person in the picture?',
-//                 style: TextStyle(
-//                     fontSize: 16,
-//                     fontWeight: FontWeight.w700,
-//                     color: Theme.of(context).primaryColor),
-//                 textAlign: TextAlign.center,
-//               ),
-//               Text(
-//                 'Choose the correct answer from the options below.',
-//                 style: TextStyle(
-//                     fontSize: 16,
-//                     fontWeight: FontWeight.w700,
-//                     color: Theme.of(context).primaryColor),
-//                 textAlign: TextAlign.center,
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class FacialExpressionExercisePage extends StatelessWidget {
   const FacialExpressionExercisePage({Key? key}) : super(key: key);
   @override
@@ -161,11 +106,22 @@ class FacialExpressionExercisePage extends StatelessWidget {
               onPressed: _questionController.previousQuestion,
               child: const Text("Back")),
           TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: primaryColor,
-              ),
-              onPressed: _questionController.nextQuestion,
-              child: const Text("Next")),
+            style: TextButton.styleFrom(
+              foregroundColor: primaryColor,
+            ),
+            onPressed: () {
+              if (_questionController.questionNumber.value !=
+                  _questionController.questions.length) {
+                Logger().i('Next Question');
+                _questionController.nextQuestion();
+              } else {
+                Logger().i('Score Screen');
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ScoreScreen()));
+              }
+            },
+            child: const Text("Next"),
+          )
         ],
       ),
     );

@@ -68,8 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                       50), // double.infinity is the width and 50 is the height
                 ),
                 //TODO: change navigation
-                onPressed: () =>
-                    Navigator.pushNamed(context, "/MainMenu"),
+                onPressed: () => Navigator.pushNamed(context, "/MainMenu"),
                 child: const Text(
                   'Sign In',
                   style: TextStyle(color: Color(0xFFFFFFFF)),
@@ -78,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/Home');
+                  Navigator.pushNamed(context, '/MainMenu');
                 },
                 child:
                     const Text('Don\'t have an account yet? Create one now!'),
