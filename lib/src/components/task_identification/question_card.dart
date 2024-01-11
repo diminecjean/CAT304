@@ -19,15 +19,6 @@ class QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    // bool selected = false;
-
-    // void onClick(int index) {
-    //   if (selectedAns.contains(index)) {
-    //     selectedAns.remove(index);
-    //   } else {
-    //     selectedAns.add(index);
-    //   }
-    // }
 
     TaskIdentificationExerciseController controller =
         Get.put(TaskIdentificationExerciseController());
