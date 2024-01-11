@@ -37,3 +37,5 @@ flutter:
     - assets/images/
     - assets/images/svg/
     - assets/images/face_expressions/
+    - assets/images/task_management/
+    - assets/images/task_management/task_identification/
