@@ -42,6 +42,14 @@ class Option extends StatelessWidget {
             return Colors.black;
           }
 
+          Color getTheRightColor() {
+            if (qnController.clickedAns.contains(index)) {
+              return secondaryColor;
+            } else {
+              return Colors.white;
+            }
+          }
+
           return InkWell(
             onTap: press,
             child: Container(
@@ -49,7 +57,7 @@ class Option extends StatelessWidget {
               padding: const EdgeInsets.all(kDefaultPadding / 3),
               width: 150,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: getTheRightColor(),
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(color: getTheRightBorderColor()),
               ),

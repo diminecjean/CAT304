@@ -36,6 +36,9 @@ class TaskIdentificationExerciseController extends GetxController
   bool _isAnswered = false;
   bool get isAnswered => _isAnswered;
 
+  List<int> _clickedAns = <int>[];
+  List<int> get clickedAns => _clickedAns;
+
   late List<int> _correctAns;
   List<int> get correctAns => _correctAns;
 
@@ -76,7 +79,17 @@ class TaskIdentificationExerciseController extends GetxController
     _pageController.dispose();
   }
 
+  void onClick(int index) {
+    if (_clickedAns.contains(index)) {
+      _clickedAns.remove(index);
+    } else {
+      _clickedAns.add(index);
+    }
+    update();
+  }
+
   void checkAns(TaskIdentificationQuestions question, List<int> selectedIndex) {
+    _clickedAns.clear();
     _isAnswered = true;
     _correctAns = question.answer;
     _selectedAns = selectedIndex;

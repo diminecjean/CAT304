@@ -19,16 +19,15 @@ class QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    bool selected = false;
+    // bool selected = false;
 
-    void onClick(int index) {
-      if (selectedAns.contains(index)) {
-        selectedAns.remove(index);
-      } else {
-        selectedAns.add(index);
-      }
-      Get.find<TaskIdentificationExerciseController>().update();
-    }
+    // void onClick(int index) {
+    //   if (selectedAns.contains(index)) {
+    //     selectedAns.remove(index);
+    //   } else {
+    //     selectedAns.add(index);
+    //   }
+    // }
 
     TaskIdentificationExerciseController controller =
         Get.put(TaskIdentificationExerciseController());
@@ -74,10 +73,10 @@ class QuestionCard extends StatelessWidget {
                     index: index,
                     image: question.optionImages[index],
                     text: question.options[index],
-                    // color: selectedAns.contains(index)
-                    //     ? secondaryColor
-                    //     : Colors.white,
-                    press: () => onClick(index),
+                    press: () {
+                      selectedAns.add(index);
+                      controller.onClick(index);
+                    },
                   ),
                 ),
               ),
