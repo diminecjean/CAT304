@@ -1,6 +1,6 @@
-import 'package:express_all/src/components/quiz/body.dart';
+import 'package:express_all/src/components/facial_recognition/body.dart';
 import 'package:express_all/src/config/style/constants.dart';
-import 'package:express_all/src/controllers/question_controller.dart';
+import 'package:express_all/src/controllers/faceExpressionExercise_controller.dart';
 import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -70,7 +70,8 @@ class FacialExpressionExercisePage extends StatelessWidget {
   const FacialExpressionExercisePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    QuestionController _questionController = Get.put(QuestionController());
+    FaceExpressionExerciseController _questionController =
+        Get.put(FaceExpressionExerciseController());
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -78,7 +79,7 @@ class FacialExpressionExercisePage extends StatelessWidget {
           () => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Question ${_questionController.questionNumber.value}",
+              Text("Questions ${_questionController.questionNumber.value}",
                   style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
