@@ -2,7 +2,7 @@ import 'package:express_all/src/components/task_identification/option.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:express_all/src/controllers/taskIdentificationExercise_controller.dart';
-import 'package:express_all/src/models/taskIdentificationQuestions.dart';
+import 'package:express_all/src/models/taskIdentificationExerciseQuestions.dart';
 
 import '../../config/style/constants.dart';
 

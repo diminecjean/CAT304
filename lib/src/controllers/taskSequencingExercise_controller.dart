@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logger/logger.dart';
 import 'package:get/get.dart';
-import 'package:express_all/src/models/taskSequencingQuestions.dart';
+import 'package:express_all/src/models/taskSequencingExerciseQuestions.dart';
 
 // We use get package for our state management
 

@@ -2,7 +2,7 @@ import 'package:express_all/src/components/task_sequencing/option.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:express_all/src/controllers/taskSequencingExercise_controller.dart';
-import 'package:express_all/src/models/taskSequencingQuestions.dart';
+import 'package:express_all/src/models/taskSequencingExerciseQuestions.dart';
 import 'package:reorderables/reorderables.dart';
 import '../../config/style/constants.dart';
 
