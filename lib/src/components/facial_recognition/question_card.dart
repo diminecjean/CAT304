@@ -38,7 +38,7 @@ class QuestionCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
                 top: kDefaultPadding,
                 left: kDefaultPadding / 3,
                 right: kDefaultPadding / 3),
