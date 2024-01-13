@@ -70,7 +70,7 @@ class FacialExpressionExercisePage extends StatelessWidget {
   const FacialExpressionExercisePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    FaceExpressionExerciseController _questionController =
+    FaceExpressionExerciseController questionController =
         Get.put(FaceExpressionExerciseController());
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -79,13 +79,13 @@ class FacialExpressionExercisePage extends StatelessWidget {
           () => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Questions ${_questionController.questionNumber.value}",
+              Text("Questions ${questionController.questionNumber.value}",
                   style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                       color: primaryColor)),
               Text(
-                  "(${_questionController.questionNumber.value}/${_questionController.questions.length})",
+                  "(${questionController.questionNumber.value}/${questionController.questions.length})",
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -104,21 +104,21 @@ class FacialExpressionExercisePage extends StatelessWidget {
               style: TextButton.styleFrom(
                 foregroundColor: primaryColor,
               ),
-              onPressed: _questionController.previousQuestion,
+              onPressed: questionController.previousQuestion,
               child: const Text("Back")),
           TextButton(
             style: TextButton.styleFrom(
               foregroundColor: primaryColor,
             ),
             onPressed: () {
-              if (_questionController.questionNumber.value !=
-                  _questionController.questions.length) {
+              if (questionController.questionNumber.value !=
+                  questionController.questions.length) {
                 Logger().i('Next Question');
-                _questionController.nextQuestion();
+                questionController.nextQuestion();
               } else {
                 Logger().i('Score Screen');
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ScoreScreen()));
+                    MaterialPageRoute(builder: (context) => const ScoreScreen()));
               }
             },
             child: const Text("Next"),
