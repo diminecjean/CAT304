@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:logger/logger.dart';
 import 'package:get/get.dart';
 import 'package:express_all/src/models/faceExpressionExerciseQuestions.dart';
-import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
 
 // We use get package for our state management
 
