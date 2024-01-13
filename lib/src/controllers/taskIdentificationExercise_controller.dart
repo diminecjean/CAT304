@@ -36,7 +36,7 @@ class TaskIdentificationExerciseController extends GetxController
   bool _isAnswered = false;
   bool get isAnswered => _isAnswered;
 
-  List<int> _clickedAns = <int>[];
+  final List<int> _clickedAns = <int>[];
   List<int> get clickedAns => _clickedAns;
 
   late List<int> _correctAns;
