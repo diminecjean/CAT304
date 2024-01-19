@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:express_all/src/controllers/question_controller.dart';
+import 'package:express_all/src/controllers/faceExpressionExercise_controller.dart';
 
 import '../../config/style/constants.dart';
 
@@ -17,8 +17,8 @@ class Option extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<QuestionController>(
-        init: QuestionController(),
+    return GetBuilder<FaceExpressionExerciseController>(
+        init: FaceExpressionExerciseController(),
         builder: (qnController) {
           Color getTheRightColor() {
             if (qnController.isAnswered) {

@@ -10,7 +10,8 @@ class MainMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome back, Brendan'), // TODO: Have to retrieve the username.
+        title: const Text(
+            'Welcome back, Brendan'), // TODO: Have to retrieve the username.
         backgroundColor: Colors.white,
         foregroundColor: Colors.black, // Text color
         elevation: 0, // Removes the shadow
@@ -57,7 +58,8 @@ class MainMenuPage extends StatelessWidget {
           ],
         ),
       ),
-      body: SingleChildScrollView( // Allows scrolling when content is too long for the screen
+      body: SingleChildScrollView(
+        // Allows scrolling when content is too long for the screen
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -71,10 +73,18 @@ class MainMenuPage extends StatelessWidget {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  EmotionButton(imagePath:'assets/images/face_1_happy.png' , color: Colors.lightGreen),
-                  EmotionButton(imagePath:'assets/images/face_2_sad.png' , color: Colors.yellow),
-                  EmotionButton(imagePath:'assets/images/face_3_angry.png' , color: Colors.redAccent),
-                  EmotionButton(imagePath:'assets/images/face_4_normal.png' , color: Colors.lightBlue),
+                  EmotionButton(
+                      imagePath: 'assets/images/face_1_happy.png',
+                      color: Colors.lightGreen),
+                  EmotionButton(
+                      imagePath: 'assets/images/face_2_sad.png',
+                      color: Colors.yellow),
+                  EmotionButton(
+                      imagePath: 'assets/images/face_3_angry.png',
+                      color: Colors.redAccent),
+                  EmotionButton(
+                      imagePath: 'assets/images/face_4_normal.png',
+                      color: Colors.lightBlue),
                 ],
               ),
               const SizedBox(height: 30, width: 100),
@@ -84,7 +94,8 @@ class MainMenuPage extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(context, "/FacialExpression");
                   },
-                  imagePath: 'assets/images/menu_1.png', // Replace with your asset image path
+                  imagePath:
+                      'assets/images/menu_1.png', // Replace with your asset image path
                 ),
               ),
               Center(
@@ -93,16 +104,18 @@ class MainMenuPage extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(context, "/FacialExpression");
                   },
-                  imagePath: 'assets/images/menu_2.png', // Replace with your asset image path
+                  imagePath:
+                      'assets/images/menu_2.png', // Replace with your asset image path
                 ),
               ),
               Center(
                 child: MenuCard(
                   title: 'Task Management',
                   onTap: () {
-                    // Action to navigate to Task Management
+                    Navigator.pushNamed(context, "/TaskManagement");
                   },
-                  imagePath: 'assets/images/menu_3_task_mngment.png', // Replace with your asset image path
+                  imagePath:
+                      'assets/images/menu_3_task_mngment.png', // Replace with your asset image path
                 ),
               ),
               Center(
@@ -111,7 +124,8 @@ class MainMenuPage extends StatelessWidget {
                   onTap: () {
                     // Action to navigate to Emotion Detection
                   },
-                  imagePath: 'assets/images/menu_4_emotion_detection.png', // Replace with your asset image path
+                  imagePath:
+                      'assets/images/menu_4_emotion_detection.png', // Replace with your asset image path
                 ),
               ),
             ],
@@ -144,7 +158,8 @@ class EmotionButton extends StatelessWidget {
             imagePath,
             width: 50, // Set the image width
             height: 68, // Set the image height
-            fit: BoxFit.cover, // Covers the area without changing the aspect ratio
+            fit: BoxFit
+                .cover, // Covers the area without changing the aspect ratio
           ),
         ],
       ),
@@ -169,35 +184,35 @@ class MenuCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-        constraints: BoxConstraints(
+      constraints: BoxConstraints(
         minWidth: width, // Apply minimum width constraints
         maxWidth: width, // Apply maximum width constraints
-    ),
-
-    child: Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
       ),
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(15),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Image.asset(imagePath, width: 100, height: 100), // Image for the card
-              const SizedBox(height: 10),
-              Text(
-                title,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ],
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(15),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Image.asset(imagePath,
+                    width: 100, height: 100), // Image for the card
+                const SizedBox(height: 10),
+                Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
     );
   }
 }

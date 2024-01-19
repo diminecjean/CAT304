@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:express_all/src/controllers/question_controller.dart';
-import 'package:express_all/src/models/Questions.dart';
+import 'package:express_all/src/controllers/faceExpressionExercise_controller.dart';
+import 'package:express_all/src/models/faceExpressionExerciseQuestions.dart';
 
 import '../../config/style/constants.dart';
 import 'option.dart';
@@ -13,11 +13,12 @@ class QuestionCard extends StatelessWidget {
     required this.question,
   }) : super(key: key);
 
-  final Question question;
+  final FaceExpressionExerciseQuestions question;
 
   @override
   Widget build(BuildContext context) {
-    QuestionController controller = Get.put(QuestionController());
+    FaceExpressionExerciseController controller =
+        Get.put(FaceExpressionExerciseController());
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       padding: const EdgeInsets.all(kDefaultPadding / 2),
@@ -37,7 +38,7 @@ class QuestionCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
                 top: kDefaultPadding,
                 left: kDefaultPadding / 3,
                 right: kDefaultPadding / 3),

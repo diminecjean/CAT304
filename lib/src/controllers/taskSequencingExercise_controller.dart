@@ -1,46 +1,43 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logger/logger.dart';
 import 'package:get/get.dart';
-import 'package:express_all/src/models/Questions.dart';
-import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
+import 'package:express_all/src/models/taskSequencingExerciseQuestions.dart';
 
 // We use get package for our state management
 
-class QuestionController extends GetxController
+class TaskSequencingExerciseController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  // Lets animated our progress bar
-
   late AnimationController _animationController;
   late Animation _animation;
-  // so that we can access our animation outside
   Animation get animation => _animation;
 
   late PageController _pageController;
   PageController get pageController => _pageController;
 
-  final List<Question> _questions = sample_data
+  final List<TaskSequencingQuestions> _questions = task_sequencing_question
       .map(
-        (question) => Question(
+        (question) => TaskSequencingQuestions(
             id: question['id'],
-            image: question['image'],
             question: question['question'],
+            subtitle: question['subtitle'],
+            optionImages: question['optionImages'],
             options: question['options'],
-            answer: question['answer_index']),
+            answer: question['answer_sequence']),
       )
       .toList();
-  List<Question> get questions => _questions;
+  List<TaskSequencingQuestions> get questions => _questions;
 
   bool _isAnswered = false;
   bool get isAnswered => _isAnswered;
 
-  late int _correctAns;
-  int get correctAns => _correctAns;
+  late List<int> _correctAns;
+  List<int> get correctAns => _correctAns;
 
-  late int _selectedAns;
-  int get selectedAns => _selectedAns;
+  late List<int> _selectedAns;
+  List<int> get selectedAns => _selectedAns;
 
-  // for more about obs please check documentation
   final RxInt _questionNumber = 1.obs;
   RxInt get questionNumber => _questionNumber;
 
@@ -62,7 +59,7 @@ class QuestionController extends GetxController
 
     // start our animation
     // Once 60s is completed go to the next qn
-    _animationController.forward().whenComplete(nextQuestion);
+    // _animationController.forward().whenComplete(nextQuestion);
     _pageController = PageController();
     super.onInit();
   }
@@ -75,22 +72,26 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  void checkAns(Question question, int selectedIndex) {
-    // because once user press any option then it will run
+  void checkAns(TaskSequencingQuestions question, List<int> selectedSequence) {
     _isAnswered = true;
     _correctAns = question.answer;
-    _selectedAns = selectedIndex;
-
-    if (_correctAns == _selectedAns) _numOfCorrectAns++;
+    _selectedAns = selectedSequence;
+    Logger().i(_correctAns);
+    Logger().i(_selectedAns);
+    Logger().i(listEquals(_correctAns, _selectedAns));
+    if (listEquals(_correctAns, _selectedAns)) _numOfCorrectAns++;
 
     // It will stop the counter
     _animationController.stop();
     update();
+  }
 
-    // // Once user select an ans after 3s it will go to the next qn
-    // Future.delayed(Duration(seconds: 3), () {
-    //   nextQuestion();
-    // });
+  void reset() {
+    _isAnswered = false;
+    // _numOfCorrectAns = 0;
+    // _pageController.jumpToPage(0);
+    // _animationController.reset();
+    update();
   }
 
   void nextQuestion() {

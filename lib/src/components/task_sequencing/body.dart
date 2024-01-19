@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:express_all/src/config/style/constants.dart';
-import 'package:express_all/src/controllers/question_controller.dart';
+import 'package:express_all/src/controllers/taskSequencingExercise_controller.dart';
 
 import 'question_card.dart';
 
@@ -12,7 +11,8 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController questionController = Get.put(QuestionController());
+    TaskSequencingExerciseController questionController =
+        Get.put(TaskSequencingExerciseController());
     return Stack(
       children: [
         SafeArea(

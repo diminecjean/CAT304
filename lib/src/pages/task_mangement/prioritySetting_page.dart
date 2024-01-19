@@ -1,14 +1,14 @@
-import 'package:express_all/src/components/facial_recognition/body.dart';
-import 'package:express_all/src/config/style/constants.dart';
-import 'package:express_all/src/controllers/faceExpressionExercise_controller.dart';
+import 'package:express_all/src/controllers/prioritySettingExercise_controller.dart';
 import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
-class FacialExpressionPage extends StatelessWidget {
-  const FacialExpressionPage({super.key});
+import '../../components/priority_setting/body.dart';
+import '../../config/style/constants.dart';
 
+class PrioritySettingPage extends StatelessWidget {
+  const PrioritySettingPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class FacialExpressionPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  'Facial Expression Identification Practice',
+                  'Priority Setting',
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
@@ -27,7 +27,7 @@ class FacialExpressionPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Image.asset(
-                  'assets/images/facial_expression-1.png',
+                  'assets/images/task_management/timeline.png',
                   height: 350,
                 ),
                 Directionality(
@@ -43,7 +43,7 @@ class FacialExpressionPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const FacialExpressionExercisePage())),
+                                PrioritySettingExercisePage())),
                     label: const Text(
                       'Start Now',
                       textAlign: TextAlign.left,
@@ -66,26 +66,25 @@ class FacialExpressionPage extends StatelessWidget {
   }
 }
 
-class FacialExpressionExercisePage extends StatelessWidget {
-  const FacialExpressionExercisePage({Key? key}) : super(key: key);
+class PrioritySettingExercisePage extends StatelessWidget {
+  PrioritySettingExercisePage({Key? key}) : super(key: key);
+  final PrioritySettingExerciseController _questionController =
+      Get.put(PrioritySettingExerciseController());
   @override
   Widget build(BuildContext context) {
-    FaceExpressionExerciseController questionController =
-        Get.put(FaceExpressionExerciseController());
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Obx(
           () => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Questions ${questionController.questionNumber.value}",
+              Text("Question ${_questionController.questionNumber.value}",
                   style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                       color: primaryColor)),
               Text(
-                  "(${questionController.questionNumber.value}/${questionController.questions.length})",
+                  "(${_questionController.questionNumber.value}/${_questionController.questions.length})",
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -93,8 +92,6 @@ class FacialExpressionExercisePage extends StatelessWidget {
             ],
           ),
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
       ),
       body: const Body(),
       bottomNavigationBar: Row(
@@ -104,21 +101,23 @@ class FacialExpressionExercisePage extends StatelessWidget {
               style: TextButton.styleFrom(
                 foregroundColor: primaryColor,
               ),
-              onPressed: questionController.previousQuestion,
+              onPressed: _questionController.previousQuestion,
               child: const Text("Back")),
           TextButton(
             style: TextButton.styleFrom(
               foregroundColor: primaryColor,
             ),
             onPressed: () {
-              if (questionController.questionNumber.value !=
-                  questionController.questions.length) {
+              if (_questionController.questionNumber.value !=
+                  _questionController.questions.length) {
                 Logger().i('Next Question');
-                questionController.nextQuestion();
+                _questionController.nextQuestion();
               } else {
                 Logger().i('Score Screen');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ScoreScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ScoreScreen()));
               }
             },
             child: const Text("Next"),

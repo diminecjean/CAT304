@@ -19,6 +19,7 @@ dependencies:
   flutter_svg: ^2.0.9
   get: ^4.6.6
   logger: ^2.0.2+1
+  reorderables: ^0.6.0
 
 dev_dependencies:
   flutter_test:
@@ -37,3 +38,7 @@ flutter:
     - assets/images/
     - assets/images/svg/
     - assets/images/face_expressions/
+    - assets/images/task_management/
+    - assets/images/task_management/task_identification/
+    - assets/images/task_management/task_sequencing/
+    - assets/images/task_management/priority_setting/

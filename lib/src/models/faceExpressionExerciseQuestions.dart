@@ -1,9 +1,9 @@
-class Question {
+class FaceExpressionExerciseQuestions {
   final int id, answer;
   final String question, image;
   final List<String> options;
 
-  Question(
+  FaceExpressionExerciseQuestions(
       {required this.id,
       required this.image,
       required this.question,
@@ -11,7 +11,7 @@ class Question {
       required this.options});
 }
 
-const List sample_data = [
+const List face_expression_exercise_question = [
   {
     "id": 1,
     "image": "assets/images/face_expressions/boy-happy.jpg",

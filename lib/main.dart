@@ -8,6 +8,10 @@ import 'package:express_all/src/pages/account/signup_page.dart';
 import 'package:express_all/src/pages/account/chooseAccountType_page.dart';
 import 'package:express_all/src/pages/account/signup_children_page.dart';
 import 'package:express_all/src/pages/facial_expression_recognition/facialExpression_page.dart';
+import 'package:express_all/src/pages/task_mangement/prioritySetting_page.dart';
+import 'package:express_all/src/pages/task_mangement/taskIdentification_page.dart';
+import 'package:express_all/src/pages/task_mangement/taskManagement_page.dart';
+import 'package:express_all/src/pages/task_mangement/taskSequencing_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -68,6 +72,11 @@ class MyApp extends StatelessWidget {
         '/FacialExpression': (BuildContext context) =>
             const FacialExpressionPage(),
         '/ScoreScreen': (BuildContext context) => const ScoreScreen(),
+        '/TaskManagement': (BuildContext context) => const TaskManagementPage(),
+        '/TaskIdentification': (BuildContext context) =>
+            const TaskIdentificationPage(),
+        '/TaskSequencing': (BuildContext context) => const TaskSequencingPage(),
+        '/PrioritySetting': (BuildContext context) => const PrioritySettingPage(),
       },
     );
   }

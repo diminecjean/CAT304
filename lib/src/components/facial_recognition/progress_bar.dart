@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:express_all/src/controllers/question_controller.dart';
+import 'package:express_all/src/controllers/faceExpressionExercise_controller.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../config/style/constants.dart';
@@ -19,8 +19,8 @@ class ProgressBar extends StatelessWidget {
         border: Border.all(color: const Color(0xFF3F4768), width: 3),
         borderRadius: BorderRadius.circular(50),
       ),
-      child: GetBuilder<QuestionController>(
-        init: QuestionController(),
+      child: GetBuilder<FaceExpressionExerciseController>(
+        init: FaceExpressionExerciseController(),
         builder: (controller) {
           return Stack(
             children: [

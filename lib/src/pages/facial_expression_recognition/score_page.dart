@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:express_all/src/config/style/constants.dart';
-import 'package:express_all/src/controllers/question_controller.dart';
+import 'package:express_all/src/controllers/faceExpressionExercise_controller.dart';
 import 'package:flutter_svg/svg.dart';
 
 // TODO: fix score calculation
@@ -10,7 +9,8 @@ class ScoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController qnController = Get.find<QuestionController>();
+    FaceExpressionExerciseController qnController =
+        Get.find<FaceExpressionExerciseController>();
     return Scaffold(
       appBar: AppBar(),
       body: Stack(
