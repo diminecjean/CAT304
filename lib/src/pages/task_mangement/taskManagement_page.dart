@@ -8,10 +8,15 @@ class TaskManagementPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Task Management Practice'),
+        title: const Text(
+          'Task Management Practice',
+          style: TextStyle(
+              color: primaryColor, fontWeight: FontWeight.bold, fontSize: 16),
+        ),
       ),
       body: Column(
         children: [
+          const SizedBox(height: 20),
           // Task Identification
           GestureDetector(
             onTap: () {

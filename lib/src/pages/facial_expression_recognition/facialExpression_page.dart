@@ -17,6 +17,8 @@ class FacialExpressionPage extends StatelessWidget {
             margin: const EdgeInsets.all(20),
             padding: const EdgeInsets.all(20),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'Facial Expression Identification Practice',
@@ -26,10 +28,12 @@ class FacialExpressionPage extends StatelessWidget {
                       color: Theme.of(context).primaryColor),
                   textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 20),
                 Image.asset(
                   'assets/images/emotion_gesture_recognition/facial_expression-1.png',
                   height: 350,
                 ),
+                const SizedBox(height: 20),
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(

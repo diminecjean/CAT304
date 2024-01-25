@@ -73,9 +73,25 @@ class QuestionCard extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: screenHeight * 0.01,
+          ),
           ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color.fromARGB(255, 240, 154, 89)),
+                elevation: MaterialStateProperty.all<double>(2),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
               onPressed: () => controller.checkAns(question, selectedAns),
-              child: const Text("Submit")),
+              child: const Text(
+                "Submit",
+                style: TextStyle(color: Colors.white),
+              )),
         ],
       ),
     );
