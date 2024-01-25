@@ -8,6 +8,7 @@ const redColor = Color(0xFFAB0205);
 const grayColor = Color(0xFFC1C1C1);
 const blackColor = Color(0xFF101010);
 const orangeColor = Color(0xFFCA5700);
+const blueColor = Color.fromARGB(255, 37, 102, 192);
 // const kPrimaryGradient = LinearGradient(
 //   colors: [Color(0xFF46A0AE), Color(0xFF00FFCB)],
 //   begin: Alignment.centerLeft,

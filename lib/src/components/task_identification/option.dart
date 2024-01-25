@@ -34,7 +34,7 @@ class Option extends StatelessWidget {
                 return redColor;
               } else if (!qnController.selectedAns.contains(index) &&
                   qnController.correctAns.contains(index)) {
-                return orangeColor;
+                return blueColor;
               }
             }
             return Colors.black;
