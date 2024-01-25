@@ -1,5 +1,5 @@
 import 'package:express_all/src/controllers/prioritySettingExercise_controller.dart';
-import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
+import 'package:express_all/src/pages/score_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -117,7 +117,9 @@ class PrioritySettingExercisePage extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const ScoreScreen()));
+                        builder: (context) => const ScoreScreen(
+                              questionType: "PrioritySetting",
+                            )));
               }
             },
             child: const Text("Next"),

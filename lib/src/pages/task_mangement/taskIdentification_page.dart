@@ -1,5 +1,5 @@
 import 'package:express_all/src/controllers/taskIdentificationExercise_controller.dart';
-import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
+import 'package:express_all/src/pages/score_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -114,8 +114,12 @@ class TaskIdentificationExercisePage extends StatelessWidget {
                 _questionController.nextQuestion();
               } else {
                 Logger().i('Score Screen');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ScoreScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ScoreScreen(
+                              questionType: "TaskIdentification",
+                            )));
               }
             },
             child: const Text("Next"),

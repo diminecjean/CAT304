@@ -41,15 +41,16 @@ const List task_identification_question = [
   },
   {
     "id": 2,
-    "image": "assets/images/face_expressions/boy-angry.jpg",
+    "image":
+        "assets/images/emotion_gesture_recognition/face_expressions/boy-angry.jpg",
     "question": "Identify the tasks to get ready for school:",
     "optionImages": [
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
     ],
     "options": [
       'Brush Teeth',
@@ -63,15 +64,16 @@ const List task_identification_question = [
   },
   {
     "id": 3,
-    "image": "assets/images/face_expressions/boy-sad.jpg",
+    "image":
+        "assets/images/emotion_gesture_recognition/face_expressions/boy-sad.jpg",
     "question": "Identify the tasks to get ready for school:",
     "optionImages": [
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
     ],
     "options": [
       'Brush Teeth',
@@ -85,15 +87,16 @@ const List task_identification_question = [
   },
   {
     "id": 4,
-    "image": "assets/images/face_expressions/boy-amazed.jpg",
+    "image":
+        "assets/images/emotion_gesture_recognition/face_expressions/boy-amazed.jpg",
     "question": "Identify the tasks to get ready for school:",
     "optionImages": [
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
-      "assets/images/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
+      "assets/images/emotion_gesture_recognition/face_expressions/boy-happy.jpg",
     ],
     "options": [
       'Brush Teeth',

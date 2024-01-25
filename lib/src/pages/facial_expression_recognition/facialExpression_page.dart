@@ -1,7 +1,7 @@
 import 'package:express_all/src/components/facial_recognition/body.dart';
 import 'package:express_all/src/config/style/constants.dart';
 import 'package:express_all/src/controllers/faceExpressionExercise_controller.dart';
-import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
+import 'package:express_all/src/pages/score_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -27,7 +27,7 @@ class FacialExpressionPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Image.asset(
-                  'assets/images/facial_expression-1.png',
+                  'assets/images/emotion_gesture_recognition/facial_expression-1.png',
                   height: 350,
                 ),
                 Directionality(
@@ -117,8 +117,12 @@ class FacialExpressionExercisePage extends StatelessWidget {
                 questionController.nextQuestion();
               } else {
                 Logger().i('Score Screen');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ScoreScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ScoreScreen(
+                              questionType: "FacialExpression",
+                            )));
               }
             },
             child: const Text("Next"),
