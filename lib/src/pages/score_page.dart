@@ -1,5 +1,6 @@
 import 'package:express_all/src/config/style/constants.dart';
 import 'package:express_all/src/controllers/exerciseController.dart';
+import 'package:express_all/src/controllers/gestureRecognitionExercise_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:express_all/src/controllers/faceExpressionExercise_controller.dart';
@@ -23,15 +24,17 @@ class _ScoreScreenState extends State<ScoreScreen> {
   void initState() {
     super.initState();
     if (widget.questionType == "FacialExpression") {
-      controller = Get.put(FaceExpressionExerciseController());
+      controller = Get.find<FaceExpressionExerciseController>();
+    } else if (widget.questionType == "GestureRecognition") {
+      controller = Get.find<GestureRecognitionExerciseController>();
     } else if (widget.questionType == "TaskIdentification") {
-      controller = Get.put(TaskIdentificationExerciseController());
+      controller = Get.find<TaskIdentificationExerciseController>();
     } else if (widget.questionType == "TaskSequencing") {
-      controller = Get.put(TaskSequencingExerciseController());
+      controller = Get.find<TaskSequencingExerciseController>();
     } else if (widget.questionType == "PrioritySetting") {
-      controller = Get.put(PrioritySettingExerciseController());
+      controller = Get.find<PrioritySettingExerciseController>();
     } else {
-      controller = Get.put(FaceExpressionExerciseController());
+      controller = Get.find<FaceExpressionExerciseController>();
     }
   }
 
