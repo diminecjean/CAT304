@@ -19,6 +19,7 @@ class TaskIdentificationExerciseController extends ExerciseController {
                 id: question['id'],
                 image: question['image'],
                 question: question['question'],
+                explanation: question['explanation'],
                 optionImages: question['optionImages'],
                 options: question['options'],
                 answer: question['answer_index']),
@@ -27,9 +28,9 @@ class TaskIdentificationExerciseController extends ExerciseController {
   @override
   List<TaskIdentificationQuestions> get questions => _questions;
 
-  bool _isAnswered = false;
+  RxBool _isAnswered = false.obs;
   @override
-  bool get isAnswered => _isAnswered;
+  bool get isAnswered => _isAnswered.value;
 
   final List<int> _clickedAns = <int>[];
   List<int> get clickedAns => _clickedAns;
@@ -46,9 +47,9 @@ class TaskIdentificationExerciseController extends ExerciseController {
   @override
   RxInt get questionNumber => _questionNumber;
 
-  int _numOfCorrectAns = 0;
+  RxInt _numOfCorrectAns = 0.obs;
   @override
-  int get numOfCorrectAns => _numOfCorrectAns;
+  int get numOfCorrectAns => _numOfCorrectAns.value;
 
   // called immediately after the widget is allocated memory
   @override
@@ -76,14 +77,14 @@ class TaskIdentificationExerciseController extends ExerciseController {
   @override
   void checkAns(dynamic question, dynamic selectedIndex) {
     _clickedAns.clear();
-    _isAnswered = true;
+    _isAnswered.value = true;
     _correctAns = question.answer;
     _selectedAns = selectedIndex;
     _selectedAns.sort();
     Logger().i(_correctAns);
     Logger().i(_selectedAns);
     Logger().i(listEquals(_correctAns, _selectedAns));
-    if (listEquals(_correctAns, _selectedAns)) _numOfCorrectAns++;
+    if (listEquals(_correctAns, _selectedAns)) _numOfCorrectAns.value++;
 
     update();
   }
@@ -91,7 +92,7 @@ class TaskIdentificationExerciseController extends ExerciseController {
   @override
   void nextQuestion() {
     if (_questionNumber.value != _questions.length) {
-      _isAnswered = false;
+      _isAnswered.value = false;
       _pageController.nextPage(
           duration: const Duration(milliseconds: 150), curve: Curves.ease);
     }
@@ -100,7 +101,7 @@ class TaskIdentificationExerciseController extends ExerciseController {
   @override
   void previousQuestion() {
     if (_questionNumber.value != 1) {
-      _isAnswered = false;
+      _isAnswered.value = false;
       _pageController.previousPage(
           duration: const Duration(milliseconds: 150), curve: Curves.ease);
     }

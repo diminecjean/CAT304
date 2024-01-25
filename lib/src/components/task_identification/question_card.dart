@@ -37,19 +37,50 @@ class QuestionCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(
-                top: kDefaultPadding,
-                left: kDefaultPadding / 3,
-                right: kDefaultPadding / 3),
-            child: Text(
-              question.question,
-              style: const TextStyle(
-                color: primaryColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+              padding: const EdgeInsets.only(
+                  top: kDefaultPadding,
+                  left: kDefaultPadding / 3,
+                  right: kDefaultPadding / 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      question.question,
+                      style: const TextStyle(
+                        color: primaryColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Obx(() => TextButton(
+                        onPressed: controller.isAnswered
+                            ? () {
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) => _dialogBox(
+                                      context,
+                                      content: question.explanation),
+                                );
+                              }
+                            : () {
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) => _dialogBox(
+                                      context,
+                                      content:
+                                          "Select an answer first to get some explanation ✨"),
+                                );
+                              },
+                        child: const Icon(
+                          Icons.lightbulb_circle,
+                          color: primaryColor,
+                          size: 30,
+                        ),
+                      ))
+                ],
+              )),
           SizedBox(
             height: screenHeight * 0.45,
             width: screenWidth * 0.9,
@@ -87,13 +118,59 @@ class QuestionCard extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () => controller.checkAns(question, selectedAns),
+              onPressed: () {
+                if (!controller.isAnswered) {
+                  controller.checkAns(question, selectedAns);
+
+                  Future.delayed(const Duration(seconds: 1), () {
+                    showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            _dialogBox(context, content: question.explanation));
+                  });
+                }
+              },
               child: const Text(
                 "Submit",
                 style: TextStyle(color: Colors.white),
               )),
         ],
       ),
+    );
+  }
+
+  Widget _dialogBox(
+    BuildContext context, {
+    required String content,
+  }) {
+    return AlertDialog(
+      backgroundColor: backgroundColor,
+      title: const Text(
+        'Explanation 💡',
+        style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "🔴Red: Wrongly Selected\n🟢Green: Correctly Selected\n🔵Blue: Correct Answer that should be selected.",
+            style: TextStyle(
+                color: Color(0xFF7C7C7C),
+                fontSize: 10.0,
+                fontWeight: FontWeight.w300),
+          ),
+          Text(
+            content,
+            style: const TextStyle(color: primaryColor),
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'OK'),
+          child: const Text('OK', style: TextStyle(color: primaryColor)),
+        ),
+      ],
     );
   }
 }

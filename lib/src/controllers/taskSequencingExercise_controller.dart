@@ -19,6 +19,7 @@ class TaskSequencingExerciseController extends ExerciseController {
             id: question['id'],
             question: question['question'],
             subtitle: question['subtitle'],
+            explanation: question['explanation'],
             optionImages: question['optionImages'],
             options: question['options'],
             answer: question['answer_sequence']),
@@ -27,9 +28,9 @@ class TaskSequencingExerciseController extends ExerciseController {
   @override
   List<TaskSequencingQuestions> get questions => _questions;
 
-  bool _isAnswered = false;
+  RxBool _isAnswered = false.obs;
   @override
-  bool get isAnswered => _isAnswered;
+  bool get isAnswered => _isAnswered.value;
 
   late List<int> _correctAns;
   @override
@@ -43,9 +44,9 @@ class TaskSequencingExerciseController extends ExerciseController {
   @override
   RxInt get questionNumber => _questionNumber;
 
-  int _numOfCorrectAns = 0;
+  RxInt _numOfCorrectAns = 0.obs;
   @override
-  int get numOfCorrectAns => _numOfCorrectAns;
+  int get numOfCorrectAns => _numOfCorrectAns.value;
 
   // called immediately after the widget is allocated memory
   @override
@@ -63,20 +64,20 @@ class TaskSequencingExerciseController extends ExerciseController {
 
   @override
   void checkAns(dynamic question, dynamic selectedSequence) {
-    _isAnswered = true;
+    _isAnswered.value = true;
     _correctAns = question.answer;
     _selectedAns = selectedSequence;
     Logger().i(_correctAns);
     Logger().i(_selectedAns);
     Logger().i(listEquals(_correctAns, _selectedAns));
-    if (listEquals(_correctAns, _selectedAns)) _numOfCorrectAns++;
+    if (listEquals(_correctAns, _selectedAns)) _numOfCorrectAns.value++;
     Logger().i(_numOfCorrectAns);
     update();
   }
 
   @override
   void reset() {
-    _isAnswered = false;
+    _isAnswered.value = false;
     // _numOfCorrectAns = 0;
     // _pageController.jumpToPage(0);
     // _animationController.reset();
@@ -86,7 +87,7 @@ class TaskSequencingExerciseController extends ExerciseController {
   @override
   void nextQuestion() {
     if (_questionNumber.value != _questions.length) {
-      _isAnswered = false;
+      _isAnswered.value = false;
       _pageController.nextPage(
           duration: const Duration(milliseconds: 150), curve: Curves.ease);
     }
@@ -95,7 +96,7 @@ class TaskSequencingExerciseController extends ExerciseController {
   @override
   void previousQuestion() {
     if (_questionNumber.value != 1) {
-      _isAnswered = false;
+      _isAnswered.value = false;
       _pageController.previousPage(
           duration: const Duration(milliseconds: 150), curve: Curves.ease);
     }

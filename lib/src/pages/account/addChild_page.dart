@@ -1,4 +1,6 @@
+import 'package:express_all/src/config/style/constants.dart';
 import 'package:flutter/material.dart';
+
 // TODO: should have a skip button
 // TODO: should have a backward button
 class AddChildPage extends StatelessWidget {
@@ -19,18 +21,20 @@ class AddChildPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             const SizedBox(height: 20), // Spacing at the top
-            Image.asset('assets/images/children.png', height: 100), // Replace with your asset image for child icon
+            Image.asset('assets/images/children.png',
+                height: 100), // Replace with your asset image for child icon
             const SizedBox(height: 20),
             TextField(
               decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.yellow[100], // Adjust the color to match the design
+                fillColor:
+                    Colors.yellow[100], // Adjust the color to match the design
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                   borderSide: BorderSide.none,
                 ),
                 prefixIcon: const Icon(Icons.person),
-                hintText: 'Username',
+                hintText: 'Email address',
               ),
             ),
             const SizedBox(height: 20),
@@ -41,7 +45,8 @@ class AddChildPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
-                minimumSize: const Size(double.infinity, 50), // Button width and height
+                minimumSize:
+                    const Size(double.infinity, 50), // Button width and height
               ),
               onPressed: () {
                 // Action to add the child
@@ -53,7 +58,9 @@ class AddChildPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/ChildSignUp');
               },
-              child: const Text("Your child don't have an account yet? Create one now!"),
+              child: const Text(
+                  "Your child don't have an account yet? Create one now!",
+                  style: TextStyle(color: primaryColor)),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -63,7 +70,8 @@ class AddChildPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 side: const BorderSide(color: Colors.orange), // Border color
-                minimumSize: const Size(double.infinity, 50), // Button width and height
+                minimumSize:
+                    const Size(double.infinity, 50), // Button width and height
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/ChildSignUp');
