@@ -125,7 +125,7 @@ class GestureRecognitionExercisePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const ScoreScreen(
-                              questionType: "FacialExpression",
+                              questionType: "GestureRecognition",
                             )));
               }
             },

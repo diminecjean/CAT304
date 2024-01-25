@@ -19,6 +19,7 @@ class GestureRecognitionExerciseController extends ExerciseController {
                 id: question['id'],
                 image: question['image'],
                 question: question['question'],
+                explanation: question['explanation'],
                 options: question['options'],
                 answer: question['answer_index']),
           )
@@ -26,9 +27,10 @@ class GestureRecognitionExerciseController extends ExerciseController {
   @override
   List<GestureRecognitionExerciseQuestions> get questions => _questions;
 
-  bool _isAnswered = false;
+  RxBool _isAnswered = false.obs;
+
   @override
-  bool get isAnswered => _isAnswered;
+  bool get isAnswered => _isAnswered.value;
 
   late int _correctAns;
   @override
@@ -43,9 +45,9 @@ class GestureRecognitionExerciseController extends ExerciseController {
   @override
   RxInt get questionNumber => _questionNumber;
 
-  int _numOfCorrectAns = 0;
+  RxInt _numOfCorrectAns = 0.obs;
   @override
-  int get numOfCorrectAns => _numOfCorrectAns;
+  int get numOfCorrectAns => _numOfCorrectAns.value;
 
   // called immediately after the widget is allocated memory
   @override
@@ -63,19 +65,19 @@ class GestureRecognitionExerciseController extends ExerciseController {
 
   @override
   void checkAns(dynamic question, dynamic selectedIndex) {
-    _isAnswered = true;
+    _isAnswered.value = true;
     _correctAns = question.answer;
     _selectedAns = selectedIndex;
 
-    if (_correctAns == _selectedAns) _numOfCorrectAns++;
-    Logger().i(_numOfCorrectAns);
+    if (_correctAns == _selectedAns) _numOfCorrectAns.value++;
+    Logger().i(_numOfCorrectAns.value);
     update();
   }
 
   @override
   void nextQuestion() {
     if (_questionNumber.value != _questions.length) {
-      _isAnswered = false;
+      _isAnswered.value = false;
       _pageController.nextPage(
           duration: const Duration(milliseconds: 150), curve: Curves.ease);
     }
@@ -84,7 +86,7 @@ class GestureRecognitionExerciseController extends ExerciseController {
   @override
   void previousQuestion() {
     if (_questionNumber.value != 1) {
-      _isAnswered = false;
+      _isAnswered.value = false;
       _pageController.previousPage(
           duration: const Duration(milliseconds: 150), curve: Curves.ease);
     }
@@ -97,9 +99,9 @@ class GestureRecognitionExerciseController extends ExerciseController {
 
   @override
   void reset() {
-    _isAnswered = false;
+    _isAnswered = false as RxBool;
     _questionNumber.value = 1;
-    _numOfCorrectAns = 0;
+    _numOfCorrectAns.value = 0;
     _pageController.jumpToPage(0);
   }
 
