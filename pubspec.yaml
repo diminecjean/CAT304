@@ -20,6 +20,11 @@ dependencies:
   get: ^4.6.6
   logger: ^2.0.2+1
   reorderables: ^0.6.0
+  firebase_core: ^2.24.2
+  firebase_database: ^10.4.0
+  firebase_auth: ^4.16.0
+  fluttertoast: 8.2.2
+  cloud_firestore: ^4.14.0
 
 dev_dependencies:
   flutter_test:
@@ -37,8 +42,11 @@ flutter:
     # Add assets from the images directory to the application.
     - assets/images/
     - assets/images/svg/
-    - assets/images/face_expressions/
+    - assets/images/emotion_gesture_recognition/
+    - assets/images/emotion_gesture_recognition/face_expressions/
+    - assets/images/emotion_gesture_recognition/gesture_recognition/
     - assets/images/task_management/
     - assets/images/task_management/task_identification/
     - assets/images/task_management/task_sequencing/
     - assets/images/task_management/priority_setting/
+    - assets/images/score_page/
