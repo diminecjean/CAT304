@@ -40,7 +40,7 @@ const List gesture_recognition_exercise_question = [
   {
     "id": 4,
     "image":
-        "assets/images/emotion_gesture_recognition/gesture_recognition/cross_arms.jpg",
+        "assets/images/emotion_gesture_recognition/gesture_recognition/cross_arms.png",
     "question":
         "In a group setting, observing people with crossed arms might suggest:",
     "options": ['Sad', 'Defensiveness', 'Openness'],
