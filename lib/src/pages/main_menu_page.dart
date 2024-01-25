@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:express_all/src/auth/firebase_auth.dart';
 
-// TODO: Retrieve username for the AppBar
 // TODO: Have to let emotion button able to click and save something
 
 class MainMenuPage extends StatefulWidget {
@@ -18,33 +17,22 @@ class _MainMenuPageState extends State<MainMenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: FutureBuilder<User?>(
-          future: _auth.getCurrentUser(),
-          builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
-            } else if (snapshot.hasError) {
-              return Text('Welcome back');
-            } else {
-              return Text(
-                  'Welcome back, ${snapshot.data?.displayName ?? 'User'}');
-            }
-          },
-        ), // TODO: Have to retrieve the username.
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black, // Text color
-        elevation: 0, // Removes the shadow
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu, color: Colors.black),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(30.0),
+        child: AppBar(
+          foregroundColor: Colors.black, // Text color
+          elevation: 0, // Removes the shadow
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.menu, color: Colors.black),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
+          ),
         ),
       ),
       drawer: Drawer(
@@ -130,13 +118,46 @@ class _MainMenuPageState extends State<MainMenuPage> {
       body: SingleChildScrollView(
         // Allows scrolling when content is too long for the screen
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text(
-                'How are you feeling today?',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      FutureBuilder<User?>(
+                        future: _auth.getCurrentUser(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<User?> snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            return Text('Welcome back');
+                          } else {
+                            return Text(
+                              'Welcome back, ${snapshot.data?.displayName ?? 'User'}',
+                              style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            );
+                          }
+                        },
+                      ),
+                      const Text(
+                        'How are you feeling today?',
+                        style: TextStyle(fontSize: 16, color: primaryColor),
+                      ),
+                    ],
+                  ),
+                  Image.asset(
+                    "assets/images/menu_5_profile_pic.png",
+                    height: 80,
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               const Row(
@@ -248,6 +269,9 @@ class MenuCard extends StatelessWidget {
         maxWidth: width, // Apply maximum width constraints
       ),
       child: Card(
+        color: Colors.white,
+        // shadowColor: Color(0x1F4F4F4F),
+        elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -257,15 +281,18 @@ class MenuCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
+            child: Row(
               children: [
                 Image.asset(imagePath,
                     width: 100, height: 100), // Image for the card
                 const SizedBox(height: 10),
-                Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
+                Flexible(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, color: primaryColor),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),
