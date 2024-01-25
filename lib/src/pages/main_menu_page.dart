@@ -79,7 +79,7 @@ class _MainMenuPageState extends State<MainMenuPage> {
                         Text(
                           'Are you sure you want to log out?',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: primaryColor,
                           ),
@@ -92,7 +92,8 @@ class _MainMenuPageState extends State<MainMenuPage> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text('Cancel'),
+                              child: const Text('Cancel',
+                                  style: TextStyle(color: Colors.black)),
                             ),
                             TextButton(
                               onPressed: () async {
@@ -100,7 +101,10 @@ class _MainMenuPageState extends State<MainMenuPage> {
                                 Navigator.pushNamedAndRemoveUntil(
                                     context, '/Login', (route) => false);
                               },
-                              child: const Text('Log Out'),
+                              child: const Text(
+                                'Log Out',
+                                style: TextStyle(color: Colors.black),
+                              ),
                             ),
                           ],
                         )
@@ -236,8 +240,8 @@ class EmotionButton extends StatelessWidget {
         children: [
           Image.asset(
             imagePath,
-            width: 50, // Set the image width
-            height: 68, // Set the image height
+            width: 40, // Set the image width
+            height: 58, // Set the image height
             fit: BoxFit
                 .cover, // Covers the area without changing the aspect ratio
           ),
