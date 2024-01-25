@@ -1,47 +1,44 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:logger/logger.dart';
 import 'package:get/get.dart';
-import 'package:express_all/src/models/taskIdentificationExerciseQuestions.dart';
+import 'package:logger/logger.dart';
+import 'package:express_all/src/models/gestureRecognitionExerciseQuestions.dart';
 import 'package:express_all/src/controllers/exerciseController.dart';
+
 // We use get package for our state management
 
-class TaskIdentificationExerciseController extends ExerciseController {
+class GestureRecognitionExerciseController extends ExerciseController {
   late PageController _pageController;
   @override
   PageController get pageController => _pageController;
 
-  final List<TaskIdentificationQuestions> _questions =
-      task_identification_question
+  final List<GestureRecognitionExerciseQuestions> _questions =
+      gesture_recognition_exercise_question
           .map(
-            (question) => TaskIdentificationQuestions(
+            (question) => GestureRecognitionExerciseQuestions(
                 id: question['id'],
                 image: question['image'],
                 question: question['question'],
-                optionImages: question['optionImages'],
                 options: question['options'],
                 answer: question['answer_index']),
           )
           .toList();
   @override
-  List<TaskIdentificationQuestions> get questions => _questions;
+  List<GestureRecognitionExerciseQuestions> get questions => _questions;
 
   bool _isAnswered = false;
   @override
   bool get isAnswered => _isAnswered;
 
-  final List<int> _clickedAns = <int>[];
-  List<int> get clickedAns => _clickedAns;
-
-  late List<int> _correctAns;
+  late int _correctAns;
   @override
-  List<int> get correctAns => _correctAns;
+  int get correctAns => _correctAns;
 
-  late List<int> _selectedAns;
+  late int _selectedAns;
   @override
-  List<int> get selectedAns => _selectedAns;
+  int get selectedAns => _selectedAns;
 
+  // for more about obs please check documentation
   final RxInt _questionNumber = 1.obs;
   @override
   RxInt get questionNumber => _questionNumber;
@@ -64,27 +61,14 @@ class TaskIdentificationExerciseController extends ExerciseController {
     _pageController.dispose();
   }
 
-  void onClick(int index) {
-    if (_clickedAns.contains(index)) {
-      _clickedAns.remove(index);
-    } else {
-      _clickedAns.add(index);
-    }
-    update();
-  }
-
   @override
   void checkAns(dynamic question, dynamic selectedIndex) {
-    _clickedAns.clear();
     _isAnswered = true;
     _correctAns = question.answer;
     _selectedAns = selectedIndex;
-    _selectedAns.sort();
-    Logger().i(_correctAns);
-    Logger().i(_selectedAns);
-    Logger().i(listEquals(_correctAns, _selectedAns));
-    if (listEquals(_correctAns, _selectedAns)) _numOfCorrectAns++;
 
+    if (_correctAns == _selectedAns) _numOfCorrectAns++;
+    Logger().i(_numOfCorrectAns);
     update();
   }
 
@@ -109,6 +93,14 @@ class TaskIdentificationExerciseController extends ExerciseController {
   @override
   void updateTheQnNum(int index) {
     _questionNumber.value = index + 1;
+  }
+
+  @override
+  void reset() {
+    _isAnswered = false;
+    _questionNumber.value = 1;
+    _numOfCorrectAns = 0;
+    _pageController.jumpToPage(0);
   }
 
   @override
