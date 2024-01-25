@@ -1,6 +1,7 @@
 import 'package:express_all/src/config/config_color.dart';
 import 'package:express_all/src/pages/account/addChild_page.dart';
 import 'package:express_all/src/pages/account/login_page.dart';
+import 'package:express_all/src/pages/dashboard/dashboard_page.dart';
 import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
 import 'package:express_all/src/pages/main_menu_page.dart';
 import 'package:express_all/src/pages/onboarding_page.dart';
@@ -77,6 +78,7 @@ class MyApp extends StatelessWidget {
             const TaskIdentificationPage(),
         '/TaskSequencing': (BuildContext context) => const TaskSequencingPage(),
         '/PrioritySetting': (BuildContext context) => const PrioritySettingPage(),
+        '/Dashboard': (BuildContext context) => const DashboardPage(),
       },
     );
   }
