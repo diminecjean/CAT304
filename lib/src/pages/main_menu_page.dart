@@ -1,17 +1,37 @@
+import 'package:express_all/src/config/style/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:express_all/src/auth/firebase_auth.dart';
 
 // TODO: Retrieve username for the AppBar
 // TODO: Have to let emotion button able to click and save something
 
-class MainMenuPage extends StatelessWidget {
-  const MainMenuPage({super.key});
+class MainMenuPage extends StatefulWidget {
+  const MainMenuPage({Key? key}) : super(key: key);
 
+  @override
+  _MainMenuPageState createState() => _MainMenuPageState();
+}
+
+class _MainMenuPageState extends State<MainMenuPage> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-            'Welcome back, Brendan'), // TODO: Have to retrieve the username.
+        title: FutureBuilder<User?>(
+          future: _auth.getCurrentUser(),
+          builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Welcome back');
+            } else {
+              return Text(
+                  'Welcome back, ${snapshot.data?.displayName ?? 'User'}');
+            }
+          },
+        ), // TODO: Have to retrieve the username.
         backgroundColor: Colors.white,
         foregroundColor: Colors.black, // Text color
         elevation: 0, // Removes the shadow
@@ -28,25 +48,26 @@ class MainMenuPage extends StatelessWidget {
         ),
       ),
       drawer: Drawer(
+        width: 240,
+        backgroundColor: backgroundColor,
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Messages'),
-            ),
+          children: <Widget>[
+            SizedBox(
+                height: 300,
+                child: DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: backgroundColor,
+                    ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/images/expressall_icon.png",
+                          height: 200,
+                        ),
+                        const Spacer(),
+                      ],
+                    ))),
             ListTile(
               leading: Icon(Icons.account_circle),
               title: Text('Profile'),
@@ -54,6 +75,54 @@ class MainMenuPage extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.settings),
               title: Text('Settings'),
+            ),
+            ListTile(
+              onTap: () => showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => Dialog(
+                  backgroundColor: backgroundColor,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: 15),
+                        Text(
+                          'Are you sure you want to log out?',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: primaryColor,
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                await FirebaseAuth.instance.signOut();
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, '/Login', (route) => false);
+                              },
+                              child: const Text('Log Out'),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              leading: Icon(Icons.logout),
+              title: Text('Log Out'),
             ),
           ],
         ),
@@ -90,19 +159,9 @@ class MainMenuPage extends StatelessWidget {
               const SizedBox(height: 30, width: 100),
               Center(
                 child: MenuCard(
-                  title: 'Ready to learn?',
-                  onTap: () {
-                    Navigator.pushNamed(context, "/FacialExpression");
-                  },
-                  imagePath:
-                      'assets/images/menu_1.png', // Replace with your asset image path
-                ),
-              ),
-              Center(
-                child: MenuCard(
                   title: 'Emotion and Gesture Recognition Practice',
                   onTap: () {
-                    Navigator.pushNamed(context, "/FacialExpression");
+                    Navigator.pushNamed(context, "/EmotionGestureRecognition");
                   },
                   imagePath:
                       'assets/images/menu_2.png', // Replace with your asset image path
