@@ -13,6 +13,8 @@ import 'package:express_all/src/pages/task_mangement/prioritySetting_page.dart';
 import 'package:express_all/src/pages/task_mangement/taskIdentification_page.dart';
 import 'package:express_all/src/pages/task_mangement/taskManagement_page.dart';
 import 'package:express_all/src/pages/task_mangement/taskSequencing_page.dart';
+import 'package:express_all/src/pages/emotion_detection/emotion_detect_page.dart';
+import 'package:express_all/src/pages/parent_menu_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -79,6 +81,8 @@ class MyApp extends StatelessWidget {
         '/TaskSequencing': (BuildContext context) => const TaskSequencingPage(),
         '/PrioritySetting': (BuildContext context) => const PrioritySettingPage(),
         '/Dashboard': (BuildContext context) => const DashboardPage(),
+        '/EmotionDetection': (BuildContext context) => const EmotionDetectionPage(),
+        '/ParentMenu': (BuildContext context) => const ParentMenuPage(),
       },
     );
   }

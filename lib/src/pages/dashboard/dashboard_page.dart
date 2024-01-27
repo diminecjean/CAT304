@@ -10,14 +10,16 @@ class DashboardPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Progress Report'),
       ),
-      body: Column(
-        children: <Widget>[
-          // User info and mood chart
-          UserInfoSection(),
-          MoodChartSection(),
-          // Practice chart
-          PracticeChartSection(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            // User info and mood chart
+            UserInfoSection(),
+            MoodChartSection(),
+            // Practice chart
+            PracticeChartSection(),
+          ],
+        ),
       ),
     );
   }
@@ -27,8 +29,8 @@ class UserInfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // This section contains the user info, like the name and profile picture
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    return const Padding(
+      padding: EdgeInsets.all(16.0),
       child: Row(
         children: <Widget>[
           CircleAvatar(
@@ -57,19 +59,39 @@ class MoodChartSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SfCartesianChart(
-      primaryXAxis: CategoryAxis(),
-      series: <ChartSeries>[
-        // Renders bar chart
-        ColumnSeries<MoodData, String>(
-          dataSource: moodData,
-          xValueMapper: (MoodData data, _) => data.mood,
-          yValueMapper: (MoodData data, _) => data.count,
-        )
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch, // Ensure the title stretches to the width of the chart
+      mainAxisSize: MainAxisSize.min, // To control the space that the Column occupies
+      children: [
+        const Text(
+          'Mood Chart',
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center, // Center align the text
+        ),
+        SizedBox(height: 8), // Add some space between the text and the chart
+        Container(
+          height: 200, // Fixed height for the chart
+          child: SfCartesianChart(
+            primaryXAxis: CategoryAxis(),
+            title: ChartTitle(text: 'Weekly Mood'), // Chart title
+            series: <ColumnSeries<MoodData, String>>[
+              // Renders bar chart
+              ColumnSeries<MoodData, String>(
+                dataSource: moodData,
+                xValueMapper: (MoodData data, _) => data.mood,
+                yValueMapper: (MoodData data, _) => data.count,
+              )
+            ],
+          ),
+        ),
       ],
     );
   }
 }
+
 
 class PracticeChartSection extends StatelessWidget {
   // Dummy data for the practice chart
@@ -85,21 +107,41 @@ class PracticeChartSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SfCartesianChart(
-      primaryXAxis: CategoryAxis(),
-      series: <ChartSeries>[
-        // Renders column chart
-        ColumnSeries<PracticeData, String>(
-          dataSource: practiceData,
-          xValueMapper: (PracticeData data, _) => data.day,
-          yValueMapper: (PracticeData data, _) => data.questions,
-          // Enables the tooltip
-          enableTooltip: true,
-        )
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Practice Chart',
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Container(
+          height: 200, // Fixed height for the chart
+          child: SfCartesianChart(
+            primaryXAxis: CategoryAxis(),
+            title: ChartTitle(text: 'Daily Questions Solved'), // Internal Chart Title
+            series: <ColumnSeries<PracticeData, String>>[
+              ColumnSeries<PracticeData, String>(
+                dataSource: practiceData,
+                xValueMapper: (PracticeData data, _) => data.day,
+                yValueMapper: (PracticeData data, _) => data.questions,
+                enableTooltip: true,
+              )
+            ],
+          ),
+        ),
       ],
     );
   }
 }
+
 
 class MoodData {
   MoodData(this.mood, this.count);
