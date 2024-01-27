@@ -37,7 +37,7 @@ class Option extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(top: kDefaultPadding),
               padding: const EdgeInsets.all(kDefaultPadding / 3),
-              width: 150,
+              width: 140,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
@@ -68,7 +68,7 @@ class Option extends StatelessWidget {
                             color: getTheRightBorderColor() == secondaryColor
                                 ? primaryColor
                                 : getTheRightBorderColor(),
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                         ),
                       ],

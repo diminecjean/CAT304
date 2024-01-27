@@ -1,14 +1,18 @@
+import 'package:express_all/firebase_options.dart';
 import 'package:express_all/src/config/config_color.dart';
 import 'package:express_all/src/pages/account/addChild_page.dart';
 import 'package:express_all/src/pages/account/login_page.dart';
 import 'package:express_all/src/pages/dashboard/dashboard_page.dart';
-import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
+import 'package:express_all/src/pages/facial_expression_recognition/emotionGestureRecognition_page.dart';
+import 'package:express_all/src/pages/facial_expression_recognition/gestureRecognition_page.dart';
+import 'package:express_all/src/pages/score_page.dart';
 import 'package:express_all/src/pages/main_menu_page.dart';
 import 'package:express_all/src/pages/onboarding_page.dart';
 import 'package:express_all/src/pages/account/signup_page.dart';
 import 'package:express_all/src/pages/account/chooseAccountType_page.dart';
 import 'package:express_all/src/pages/account/signup_children_page.dart';
 import 'package:express_all/src/pages/facial_expression_recognition/facialExpression_page.dart';
+import 'package:express_all/src/pages/parents/dashboard_page.dart';
 import 'package:express_all/src/pages/task_mangement/prioritySetting_page.dart';
 import 'package:express_all/src/pages/task_mangement/taskIdentification_page.dart';
 import 'package:express_all/src/pages/task_mangement/taskManagement_page.dart';
@@ -16,11 +20,16 @@ import 'package:express_all/src/pages/task_mangement/taskSequencing_page.dart';
 import 'package:express_all/src/pages/emotion_detection/emotion_detect_page.dart';
 import 'package:express_all/src/pages/parent_menu_page.dart';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp()); // Replace with your app's name
 }
 
 class MyApp extends StatelessWidget {
@@ -72,9 +81,15 @@ class MyApp extends StatelessWidget {
             const ChooseAccountTypePage(),
         '/MainMenu': (BuildContext context) => const MainMenuPage(),
         '/AddChild': (BuildContext context) => const AddChildPage(),
+        '/EmotionGestureRecognition': (BuildContext context) =>
+            const emotionGestureRecognitionPage(),
         '/FacialExpression': (BuildContext context) =>
             const FacialExpressionPage(),
-        '/ScoreScreen': (BuildContext context) => const ScoreScreen(),
+        '/GestureRecognition': (BuildContext context) =>
+            const GestureRecognitionPage(),
+        '/ScoreScreen': (BuildContext context) => const ScoreScreen(
+              questionType: "none",
+            ),
         '/TaskManagement': (BuildContext context) => const TaskManagementPage(),
         '/TaskIdentification': (BuildContext context) =>
             const TaskIdentificationPage(),
@@ -87,28 +102,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// class SignInPage extends StatelessWidget {
-//   const SignInPage({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Sign In')),
-//       body: Center(child: Text('Welcome to the Sign In Page')),
-//     );
-//   }
-// }
-
-// class CreateAccountPage extends StatelessWidget {
-//   const CreateAccountPage({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Create Account')),
-//       body: Center(child: Text('Welcome to the Create Account Page')),
-//     );
-//   }
-// }
-

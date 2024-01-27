@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "521317326662",
+    "firebase_url": "https://express-all-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "express-all",
+    "storage_bucket": "express-all.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521317326662:android:e317c91bba08d3d5ea4f47",
+        "android_client_info": {
+          "package_name": "com.example.express_all"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGRvbIQl1vgNT1lp_y2Or4ae9bLrIgB64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
