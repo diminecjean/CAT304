@@ -93,6 +93,8 @@ class _LoginPageState extends State<LoginPage> {
                   minimumSize: const Size(double.infinity,
                       50), // double.infinity is the width and 50 is the height
                 ),
+                //TODO: change navigation
+                
                 onPressed: () => _signIn(),
                 child: Center(
                   child: _isSigning

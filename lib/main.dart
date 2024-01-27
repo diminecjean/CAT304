@@ -2,6 +2,7 @@ import 'package:express_all/firebase_options.dart';
 import 'package:express_all/src/config/config_color.dart';
 import 'package:express_all/src/pages/account/addChild_page.dart';
 import 'package:express_all/src/pages/account/login_page.dart';
+import 'package:express_all/src/pages/dashboard/dashboard_page.dart';
 import 'package:express_all/src/pages/facial_expression_recognition/emotionGestureRecognition_page.dart';
 import 'package:express_all/src/pages/facial_expression_recognition/gestureRecognition_page.dart';
 import 'package:express_all/src/pages/score_page.dart';
@@ -16,8 +17,10 @@ import 'package:express_all/src/pages/task_mangement/prioritySetting_page.dart';
 import 'package:express_all/src/pages/task_mangement/taskIdentification_page.dart';
 import 'package:express_all/src/pages/task_mangement/taskManagement_page.dart';
 import 'package:express_all/src/pages/task_mangement/taskSequencing_page.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:express_all/src/pages/emotion_detection/emotion_detect_page.dart';
+import 'package:express_all/src/pages/parent_menu_page.dart';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -91,9 +94,10 @@ class MyApp extends StatelessWidget {
         '/TaskIdentification': (BuildContext context) =>
             const TaskIdentificationPage(),
         '/TaskSequencing': (BuildContext context) => const TaskSequencingPage(),
-        '/PrioritySetting': (BuildContext context) =>
-            const PrioritySettingPage(),
-        '/Dashboard': (BuildContext context) => DashboardPage(),
+        '/PrioritySetting': (BuildContext context) => const PrioritySettingPage(),
+        '/Dashboard': (BuildContext context) => const DashboardPage(),
+        '/EmotionDetection': (BuildContext context) => const EmotionDetectionPage(),
+        '/ParentMenu': (BuildContext context) => const ParentMenuPage(),
       },
     );
   }
