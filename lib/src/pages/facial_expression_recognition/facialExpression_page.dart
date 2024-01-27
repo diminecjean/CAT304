@@ -1,7 +1,7 @@
 import 'package:express_all/src/components/facial_recognition/body.dart';
 import 'package:express_all/src/config/style/constants.dart';
 import 'package:express_all/src/controllers/faceExpressionExercise_controller.dart';
-import 'package:express_all/src/pages/facial_expression_recognition/score_page.dart';
+import 'package:express_all/src/pages/score_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -17,6 +17,8 @@ class FacialExpressionPage extends StatelessWidget {
             margin: const EdgeInsets.all(20),
             padding: const EdgeInsets.all(20),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'Facial Expression Identification Practice',
@@ -26,10 +28,12 @@ class FacialExpressionPage extends StatelessWidget {
                       color: Theme.of(context).primaryColor),
                   textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 20),
                 Image.asset(
-                  'assets/images/facial_expression-1.png',
+                  'assets/images/emotion_gesture_recognition/facial_expression-1.png',
                   height: 350,
                 ),
+                const SizedBox(height: 20),
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
@@ -117,8 +121,12 @@ class FacialExpressionExercisePage extends StatelessWidget {
                 questionController.nextQuestion();
               } else {
                 Logger().i('Score Screen');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ScoreScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ScoreScreen(
+                              questionType: "FacialExpression",
+                            )));
               }
             },
             child: const Text("Next"),

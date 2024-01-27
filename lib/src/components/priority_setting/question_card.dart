@@ -78,29 +78,66 @@ class _QuestionCardState extends State<QuestionCard> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-                left: kDefaultPadding / 3, right: kDefaultPadding / 3),
-            child: Text(
-              widget.question.question,
-              style: const TextStyle(
-                color: primaryColor,
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
+          Row(
+            children: [
+              Flexible(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: kDefaultPadding / 3,
+                          right: kDefaultPadding / 3),
+                      child: Text(
+                        widget.question.question,
+                        style: const TextStyle(
+                          color: primaryColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: kDefaultPadding / 3,
+                          right: kDefaultPadding / 3),
+                      child: Text(
+                        widget.question.subtitle,
+                        style: const TextStyle(
+                          color: primaryColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-                left: kDefaultPadding / 3, right: kDefaultPadding / 3),
-            child: Text(
-              widget.question.subtitle,
-              style: const TextStyle(
-                color: primaryColor,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+              Obx(() => TextButton(
+                    onPressed: controller.isAnswered
+                        ? () {
+                            showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => _dialogBox(
+                                  context,
+                                  content: widget.question.explanation),
+                            );
+                          }
+                        : () {
+                            showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => _dialogBox(
+                                  context,
+                                  content:
+                                      "Select an answer first to get some explanation ✨"),
+                            );
+                          },
+                    child: const Icon(
+                      Icons.lightbulb_circle,
+                      color: primaryColor,
+                      size: 30,
+                    ),
+                  ))
+            ],
           ),
           SizedBox(
             height: screenHeight * 0.65,
@@ -114,16 +151,84 @@ class _QuestionCardState extends State<QuestionCard> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 240, 154, 89)),
+                    elevation: MaterialStateProperty.all<double>(2),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
                   onPressed: () => controller.reset(),
-                  child: const Text("Restart")),
+                  child: const Text("Restart",
+                      style: TextStyle(color: Colors.white))),
               ElevatedButton(
-                  onPressed: () =>
-                      controller.checkAns(widget.question, selectedSequence),
-                  child: const Text("Submit")),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 240, 154, 89)),
+                    elevation: MaterialStateProperty.all<double>(2),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (!controller.isAnswered) {
+                      controller.checkAns(widget.question, selectedSequence);
+
+                      Future.delayed(const Duration(seconds: 1), () {
+                        showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => _dialogBox(
+                                context,
+                                content: widget.question.explanation));
+                      });
+                    }
+                  },
+                  child: const Text("Submit",
+                      style: TextStyle(color: Colors.white))),
             ],
           )
         ],
       ),
+    );
+  }
+
+  Widget _dialogBox(
+    BuildContext context, {
+    required String content,
+  }) {
+    return AlertDialog(
+      backgroundColor: backgroundColor,
+      title: const Text(
+        'Explanation 💡',
+        style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "🔴Red: Wrongly Selected\n🟢Green: Correctly Selected\n🔵Blue: Correct Answer that should be selected.",
+            style: TextStyle(
+                color: Color(0xFF7C7C7C),
+                fontSize: 10.0,
+                fontWeight: FontWeight.w300),
+          ),
+          Text(
+            content,
+            style: const TextStyle(color: primaryColor),
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'OK'),
+          child: const Text('OK', style: TextStyle(color: primaryColor)),
+        ),
+      ],
     );
   }
 }
