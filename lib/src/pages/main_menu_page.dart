@@ -1,7 +1,7 @@
 import 'package:express_all/src/config/style/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:express_all/src/auth/firebase_auth.dart';
+import 'package:express_all/src/services/auth/firebase_auth.dart';
 
 // TODO: Have to let emotion button able to click and save something
 
@@ -18,7 +18,7 @@ class _MainMenuPageState extends State<MainMenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(30.0),
+        preferredSize: const Size.fromHeight(30.0),
         child: AppBar(
           foregroundColor: Colors.black, // Text color
           elevation: 0, // Removes the shadow
@@ -44,7 +44,7 @@ class _MainMenuPageState extends State<MainMenuPage> {
             SizedBox(
                 height: 300,
                 child: DrawerHeader(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: backgroundColor,
                     ),
                     child: Column(
@@ -56,11 +56,11 @@ class _MainMenuPageState extends State<MainMenuPage> {
                         const Spacer(),
                       ],
                     ))),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.account_circle),
               title: Text('Profile'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.settings),
               title: Text('Settings'),
             ),
@@ -70,13 +70,14 @@ class _MainMenuPageState extends State<MainMenuPage> {
                 builder: (BuildContext context) => Dialog(
                   backgroundColor: backgroundColor,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(height: 15),
-                        Text(
+                        const SizedBox(height: 15),
+                        const Text(
                           'Are you sure you want to log out?',
                           style: TextStyle(
                             fontSize: 14,
@@ -113,8 +114,8 @@ class _MainMenuPageState extends State<MainMenuPage> {
                   ),
                 ),
               ),
-              leading: Icon(Icons.logout),
-              title: Text('Log Out'),
+              leading: const Icon(Icons.logout),
+              title: const Text('Log Out'),
             ),
           ],
         ),
@@ -130,6 +131,7 @@ class _MainMenuPageState extends State<MainMenuPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       FutureBuilder<User?>(
                         future: _auth.getCurrentUser(),
@@ -137,15 +139,15 @@ class _MainMenuPageState extends State<MainMenuPage> {
                             AsyncSnapshot<User?> snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return CircularProgressIndicator();
+                            return const CircularProgressIndicator();
                           } else if (snapshot.hasError) {
-                            return Text('Welcome back');
+                            return const Text('Welcome back');
                           } else {
                             return Text(
                               'Welcome back, ${snapshot.data?.displayName ?? 'User'}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: primaryColor,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold),
                             );
                           }
@@ -153,13 +155,13 @@ class _MainMenuPageState extends State<MainMenuPage> {
                       ),
                       const Text(
                         'How are you feeling today?',
-                        style: TextStyle(fontSize: 16, color: primaryColor),
+                        style: TextStyle(fontSize: 14, color: primaryColor),
                       ),
                     ],
                   ),
                   Image.asset(
                     "assets/images/menu_5_profile_pic.png",
-                    height: 80,
+                    height: 70,
                   ),
                 ],
               ),

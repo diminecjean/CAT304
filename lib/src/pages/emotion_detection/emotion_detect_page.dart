@@ -13,8 +13,8 @@ class _EmotionDetectionPageState extends State<EmotionDetectionPage> {
   XFile? _image;
 
   Future pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       _image = image;
@@ -25,21 +25,21 @@ class _EmotionDetectionPageState extends State<EmotionDetectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Emotion Detection'),
+        title: const Text('Emotion Detection'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _image == null
-                ? Text('No image selected.')
+                ? const Text('No image selected.')
                 : Image.file(File(_image!.path)),
-            Text(''),
-            Text('Emotion: Happy'),
-            Text(''),
+            const Text(''),
+            const Text('Emotion: Happy'),
+            const Text(''),
             ElevatedButton(
               onPressed: pickImage,
-              child: Text('Upload Photo'),
+              child: const Text('Upload Photo'),
             ),
 
             // Add more widgets here for further processing or displaying results

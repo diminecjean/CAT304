@@ -1,11 +1,12 @@
-import 'package:express_all/src/auth/firebase_auth.dart';
+import 'package:express_all/src/services/auth/firebase_auth.dart';
 import 'package:express_all/src/components/toast.dart';
 import 'package:express_all/src/config/style/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChildSignUpPage extends StatefulWidget {
-  const ChildSignUpPage({Key? key}) : super(key: key);
+  final String fromPage;
+  const ChildSignUpPage({Key? key, required this.fromPage}) : super(key: key);
 
   @override
   _ChildSignUpPageState createState() => _ChildSignUpPageState();
@@ -14,10 +15,12 @@ class ChildSignUpPage extends StatefulWidget {
 class _ChildSignUpPageState extends State<ChildSignUpPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
 
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _checkpasswordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _checkpasswordController =
+      TextEditingController();
 
   bool isSigningUp = false;
 
@@ -55,8 +58,11 @@ class _ChildSignUpPageState extends State<ChildSignUpPage> {
                   icon: Icons.person,
                   label: 'Username'),
               const SizedBox(height: 16),
-              // _buildTextField(context, icon: Icons.person, label: 'Age'),
-              // const SizedBox(height: 16),
+              _buildTextField(context,
+                  controller: _ageController,
+                  icon: Icons.person_2,
+                  label: 'Age'),
+              const SizedBox(height: 16),
               _buildTextField(
                 context,
                 controller: _emailController,
@@ -95,7 +101,7 @@ class _ChildSignUpPageState extends State<ChildSignUpPage> {
                 },
                 child: Center(
                   child: isSigningUp
-                      ? CircularProgressIndicator(
+                      ? const CircularProgressIndicator(
                           color: Colors.white,
                         )
                       : const Text(
@@ -118,13 +124,15 @@ class _ChildSignUpPageState extends State<ChildSignUpPage> {
     });
 
     String username = _usernameController.text;
+    String age = _ageController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
     String checkPassword = _checkpasswordController.text;
     String userType = "child";
+
     if (password == checkPassword) {
-      User? user = await _auth.signUpWithEmailAndPassword(
-          email, password, username, userType, context);
+      User? user = await _auth.signUpChild(
+          email, password, username, age, userType, context, widget.fromPage);
       if (user != null) {
         showToast(message: "User is successfully created");
         // Navigator.pushNamed(context, "/MainMenu");

@@ -1,4 +1,4 @@
-import 'package:express_all/src/auth/firebase_auth.dart';
+import 'package:express_all/src/services/auth/firebase_auth.dart';
 import 'package:express_all/src/components/toast.dart';
 import 'package:express_all/src/config/style/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,11 +14,12 @@ class ParentSignUpPage extends StatefulWidget {
 class _ParentSignUpPageState extends State<ParentSignUpPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
 
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _checkpasswordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _checkpasswordController =
+      TextEditingController();
 
   bool isSigningUp = false;
 
@@ -97,7 +98,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                 },
                 child: Center(
                   child: isSigningUp
-                      ? CircularProgressIndicator(
+                      ? const CircularProgressIndicator(
                           color: Colors.white,
                         )
                       : const Text(
@@ -125,7 +126,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
     String checkPassword = _checkpasswordController.text;
     String userType = "parent";
     if (password == checkPassword) {
-      User? user = await _auth.signUpWithEmailAndPassword(
+      User? user = await _auth.signUpParent(
           email, password, username, userType, context);
       if (user != null) {
         showToast(message: "User is successfully created");
