@@ -8,7 +8,7 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Progress Report'),
+        title: const Text('Progress Report'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -26,6 +26,8 @@ class DashboardPage extends StatelessWidget {
 }
 
 class UserInfoSection extends StatelessWidget {
+  const UserInfoSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     // This section contains the user info, like the name and profile picture
@@ -34,8 +36,8 @@ class UserInfoSection extends StatelessWidget {
       child: Row(
         children: <Widget>[
           CircleAvatar(
-            child: Icon(Icons.child_care),
             radius: 30,
+            child: Icon(Icons.child_care),
           ),
           SizedBox(width: 16),
           Text(
@@ -57,11 +59,15 @@ class MoodChartSection extends StatelessWidget {
     MoodData('Sad', 1),
   ];
 
+  MoodChartSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch, // Ensure the title stretches to the width of the chart
-      mainAxisSize: MainAxisSize.min, // To control the space that the Column occupies
+      crossAxisAlignment: CrossAxisAlignment
+          .stretch, // Ensure the title stretches to the width of the chart
+      mainAxisSize:
+          MainAxisSize.min, // To control the space that the Column occupies
       children: [
         const Text(
           'Mood Chart',
@@ -71,12 +77,13 @@ class MoodChartSection extends StatelessWidget {
           ),
           textAlign: TextAlign.center, // Center align the text
         ),
-        SizedBox(height: 8), // Add some space between the text and the chart
-        Container(
+        const SizedBox(
+            height: 8), // Add some space between the text and the chart
+        SizedBox(
           height: 200, // Fixed height for the chart
           child: SfCartesianChart(
-            primaryXAxis: CategoryAxis(),
-            title: ChartTitle(text: 'Weekly Mood'), // Chart title
+            primaryXAxis: const CategoryAxis(),
+            title: const ChartTitle(text: 'Weekly Mood'), // Chart title
             series: <ColumnSeries<MoodData, String>>[
               // Renders bar chart
               ColumnSeries<MoodData, String>(
@@ -92,7 +99,6 @@ class MoodChartSection extends StatelessWidget {
   }
 }
 
-
 class PracticeChartSection extends StatelessWidget {
   // Dummy data for the practice chart
   final List<PracticeData> practiceData = [
@@ -105,14 +111,16 @@ class PracticeChartSection extends StatelessWidget {
     PracticeData('Sun', 0),
   ];
 
+  PracticeChartSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Text(
             'Practice Chart',
             style: TextStyle(
@@ -122,11 +130,12 @@ class PracticeChartSection extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        Container(
+        SizedBox(
           height: 200, // Fixed height for the chart
           child: SfCartesianChart(
-            primaryXAxis: CategoryAxis(),
-            title: ChartTitle(text: 'Daily Questions Solved'), // Internal Chart Title
+            primaryXAxis: const CategoryAxis(),
+            title: const ChartTitle(
+                text: 'Daily Questions Solved'), // Internal Chart Title
             series: <ColumnSeries<PracticeData, String>>[
               ColumnSeries<PracticeData, String>(
                 dataSource: practiceData,
@@ -141,7 +150,6 @@ class PracticeChartSection extends StatelessWidget {
     );
   }
 }
-
 
 class MoodData {
   MoodData(this.mood, this.count);
