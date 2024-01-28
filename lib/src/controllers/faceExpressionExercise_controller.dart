@@ -28,7 +28,7 @@ class FaceExpressionExerciseController extends ExerciseController {
   @override
   List<FaceExpressionExerciseQuestions> get questions => _questions;
 
-  RxBool _isAnswered = false.obs;
+  final RxBool _isAnswered = false.obs;
 
   @override
   bool get isAnswered => _isAnswered.value;
@@ -46,7 +46,7 @@ class FaceExpressionExerciseController extends ExerciseController {
   @override
   RxInt get questionNumber => _questionNumber;
 
-  RxInt _numOfCorrectAns = 0.obs;
+  final RxInt _numOfCorrectAns = 0.obs;
   @override
   int get numOfCorrectAns => _numOfCorrectAns.value;
 

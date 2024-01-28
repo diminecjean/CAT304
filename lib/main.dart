@@ -12,7 +12,6 @@ import 'package:express_all/src/pages/account/signup_page.dart';
 import 'package:express_all/src/pages/account/chooseAccountType_page.dart';
 import 'package:express_all/src/pages/account/signup_children_page.dart';
 import 'package:express_all/src/pages/facial_expression_recognition/facialExpression_page.dart';
-import 'package:express_all/src/pages/parents/dashboard_page.dart';
 import 'package:express_all/src/pages/task_mangement/prioritySetting_page.dart';
 import 'package:express_all/src/pages/task_mangement/taskIdentification_page.dart';
 import 'package:express_all/src/pages/task_mangement/taskManagement_page.dart';
@@ -76,11 +75,13 @@ class MyApp extends StatelessWidget {
         '/Onboarding': (BuildContext context) => const OnBoardingPage(),
         '/Login': (BuildContext context) => const LoginPage(),
         '/ParentSignUp': (BuildContext context) => const ParentSignUpPage(),
-        '/ChildSignUp': (BuildContext context) => const ChildSignUpPage(),
+        '/ChildSignUp': (BuildContext context) => const ChildSignUpPage(
+              fromPage: "child",
+            ),
         '/ChooseAccountType': (BuildContext context) =>
             const ChooseAccountTypePage(),
         '/MainMenu': (BuildContext context) => const MainMenuPage(),
-        '/AddChild': (BuildContext context) => const AddChildPage(),
+        '/AddChild': (BuildContext context) => AddChildPage(),
         '/EmotionGestureRecognition': (BuildContext context) =>
             const emotionGestureRecognitionPage(),
         '/FacialExpression': (BuildContext context) =>
@@ -94,9 +95,11 @@ class MyApp extends StatelessWidget {
         '/TaskIdentification': (BuildContext context) =>
             const TaskIdentificationPage(),
         '/TaskSequencing': (BuildContext context) => const TaskSequencingPage(),
-        '/PrioritySetting': (BuildContext context) => const PrioritySettingPage(),
+        '/PrioritySetting': (BuildContext context) =>
+            const PrioritySettingPage(),
         '/Dashboard': (BuildContext context) => const DashboardPage(),
-        '/EmotionDetection': (BuildContext context) => const EmotionDetectionPage(),
+        '/EmotionDetection': (BuildContext context) =>
+            const EmotionDetectionPage(),
         '/ParentMenu': (BuildContext context) => const ParentMenuPage(),
       },
     );

@@ -45,7 +45,7 @@ class GestureRecognitionExerciseController extends ExerciseController {
   @override
   RxInt get questionNumber => _questionNumber;
 
-  RxInt _numOfCorrectAns = 0.obs;
+  final RxInt _numOfCorrectAns = 0.obs;
   @override
   int get numOfCorrectAns => _numOfCorrectAns.value;
 

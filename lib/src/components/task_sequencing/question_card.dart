@@ -210,7 +210,7 @@ class _QuestionCardState extends State<QuestionCard> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          const Text(
             "🔴Red: Wrongly Selected\n🟢Green: Correctly Selected\n🔵Blue: Correct Answer that should be selected.",
             style: TextStyle(
                 color: Color(0xFF7C7C7C),

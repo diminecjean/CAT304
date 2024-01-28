@@ -1,4 +1,4 @@
-import 'package:express_all/src/auth/firebase_auth.dart';
+import 'package:express_all/src/services/auth/firebase_auth.dart';
 import 'package:express_all/src/components/toast.dart';
 import 'package:express_all/src/config/style/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,8 +15,8 @@ class _LoginPageState extends State<LoginPage> {
   bool _isSigning = false;
   final FirebaseAuthService _auth = FirebaseAuthService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                       50), // double.infinity is the width and 50 is the height
                 ),
                 //TODO: change navigation
-                
+
                 onPressed: () => _signIn(),
                 child: Center(
                   child: _isSigning
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 40),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/MainMenu');
+                  Navigator.pushNamed(context, '/ChooseAccountType');
                 },
                 child: const Text(
                   'Don\'t have an account yet? Create one now!',
@@ -160,7 +160,6 @@ class _LoginPageState extends State<LoginPage> {
 
     if (user != null) {
       showToast(message: "Successfully signed in");
-      Navigator.pushNamed(context, "/MainMenu");
     } else {
       showToast(message: "some error occured");
     }
