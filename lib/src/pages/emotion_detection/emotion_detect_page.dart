@@ -63,7 +63,7 @@ class _EmotionDetectionPageState extends State<EmotionDetectionPage> {
                   ? const Text('No image selected.')
                   : Image.file(File(_image!.path)),
               const Text(''),
-              Text('Emotion: $_emotionResult'),
+              Text('Dominant Emotion: $_emotionResult'),
               const Text(''),
               ElevatedButton(
                 onPressed: pickImage,

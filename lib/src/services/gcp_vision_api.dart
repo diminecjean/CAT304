@@ -3,6 +3,15 @@ import 'package:googleapis/vision/v1.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'dart:convert';
 
+enum Likelihood {
+  UNKNOWN,
+  VERY_UNLIKELY,
+  UNLIKELY,
+  POSSIBLE,
+  LIKELY,
+  VERY_LIKELY,
+}
+
 class GcpVisionApi {
   final String _credentialsPath;
   VisionApi? _visionApi;
@@ -59,19 +68,49 @@ class GcpVisionApi {
   }
 
   String processFaces(List<FaceAnnotation> faces) {
-    final buffer = StringBuffer()..writeln("Faces:");
+    final buffer = StringBuffer();
     for (final face in faces) {
-      buffer.writeln("anger: ${face.angerLikelihood}");
-      buffer.writeln("joy: ${face.joyLikelihood}");
-      buffer.writeln("surprise: ${face.surpriseLikelihood}");
-      buffer.writeln("sorrow: ${face.sorrowLikelihood}");
-
-
-      final vertices = face.boundingPoly!.vertices!
-          .map((v) => "(${v.x},${v.y})")
-          .join(", ");
-      buffer.writeln("face bounds: $vertices");
+      String dominantEmotion = getDominantEmotion(face);
+      buffer.writeln(dominantEmotion);
     }
     return buffer.toString();
+  }
+
+  Likelihood stringToLikelihood(String? likelihood) {
+    switch (likelihood) {
+      case 'VERY_UNLIKELY':
+        return Likelihood.VERY_UNLIKELY;
+      case 'UNLIKELY':
+        return Likelihood.UNLIKELY;
+      case 'POSSIBLE':
+        return Likelihood.POSSIBLE;
+      case 'LIKELY':
+        return Likelihood.LIKELY;
+      case 'VERY_LIKELY':
+        return Likelihood.VERY_LIKELY;
+      default:
+        return Likelihood.UNKNOWN;
+    }
+  }
+
+  String getDominantEmotion(FaceAnnotation face) {
+    Map<String, Likelihood> emotions = {
+      "Anger": stringToLikelihood(face.angerLikelihood),
+      "Joy": stringToLikelihood(face.joyLikelihood),
+      "Surprise": stringToLikelihood(face.surpriseLikelihood),
+      "Sorrow": stringToLikelihood(face.sorrowLikelihood),
+    };
+
+    String dominantEmotion = '';
+    Likelihood highestLikelihood = Likelihood.UNKNOWN;
+
+    emotions.forEach((emotion, likelihood) {
+      if (likelihood.index > highestLikelihood.index) {
+        dominantEmotion = emotion;
+        highestLikelihood = likelihood;
+      }
+    });
+
+    return dominantEmotion;
   }
 }
