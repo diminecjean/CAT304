@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:express_all/src/services/gcp_vision_api.dart';
+import 'package:flutter/services.dart';
 
 class EmotionDetectionPage extends StatefulWidget {
   const EmotionDetectionPage({Key? key}) : super(key: key);
@@ -23,14 +24,27 @@ class _EmotionDetectionPageState extends State<EmotionDetectionPage> {
 
   Future pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    try {
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
-    if (image != null) {
-      var imageFile = File(image.path);
-      _emotionResult = await api.detectFaces(imageFile);
-      setState(() {
-        _image = image;
-      });
+      if (image != null) {
+        var imageFile = File(image.path);
+        var emotionResult = await api.detectFaces(imageFile);
+        if (mounted) {
+          setState(() {
+            _image = image;
+            _emotionResult = emotionResult;
+          });
+        }
+      }
+    } catch (e) {
+      if (e is PlatformException && e.code == 'already_active') {
+        // Handle the exception here. You might want to show a message to the user, or log the error.
+        print('Image picker is already active');
+      } else {
+        // Re-throw the exception if it's not the one we're expecting.
+        rethrow;
+      }
     }
   }
 
