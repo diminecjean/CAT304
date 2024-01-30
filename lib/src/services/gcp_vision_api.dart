@@ -1,91 +1,116 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+import 'package:googleapis/vision/v1.dart';
+import 'package:googleapis_auth/auth_io.dart';
+import 'dart:convert';
 
-class Api {
-  // Path of the input image file
-  final File inputImage;
+enum Likelihood {
+  UNKNOWN,
+  VERY_UNLIKELY,
+  UNLIKELY,
+  POSSIBLE,
+  LIKELY,
+  VERY_LIKELY,
+}
 
-  Api({required this.inputImage});
+class GcpVisionApi {
+  final String _credentialsPath;
+  VisionApi? _visionApi;
 
-  // Converts image to base64 and calls the postVision method
-  Future<String> detectFaces() async {
-    String base64Image = base64Encode(await inputImage.readAsBytes());
-    return await postVision(base64Image);
+  GcpVisionApi(this._credentialsPath);
+
+  Future<void> initialize() async {
+    final credentials = ServiceAccountCredentials.fromJson(jsonEncode(
+      {
+        "type": "service_account",
+        "project_id": "charged-kiln-411801",
+        "private_key_id": "f5e5cdcaee0160038ce1119ec73ad31274658247",
+        "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQDV8P3VWO3ijo+2\n0yxUOTtBWQZciYvAdtKQ13J6YNdSNhdPwWoD1l1WUOF73pL8ItsmVIPX7wFBw1Ui\n/aFAT/tq1JPYwJ4QhpZzHBcQQfW4WOAhLemk2Cr7OHJ0OgEjLHHi3h3uq5mKPZCY\nTD4oR5ChzdSDydQaOnk7gPDlNuyECDeCen0xGTpRkWehwRwTSp6nyVI7/Y54FMyR\nGCrNu+gdcfznO9hE+bLdjwieUgMIHP+Dc403l+vbHqCFP8SGPE/VT6zVHN5u+yYL\nNZUa8xC7lOn2M/xHd5NPtzS67+XiTB11WzWSnQyYlQe7pHsobPX4vkZmbtoyqFhr\n5x84EdYzAgMBAAECgf8PJp5hgkTRwdUM1mLpufRzlJNLyvaar3C1THm3Q+uJ/p/9\nVoqFi6QQhwigUAsrs4Udb20DStITE9Bzrqh1p98OhxJjHJZN9B2ghIdpdKqrCWda\nuUk2JboU6obkoUnul07hs+woXmb3vVrtIlMxmgXFScAdI2IWGpw46yZdFTYTBwtv\noxKZXSDF9+7tL23S+CHEp4QN4I6W78/pfKpBPir1fZzIZV8EkgDQTcvJy5cA3GZm\n0c7pOAELicu0a7WGvEVOWraG8tFSCn4Gj8ocAqxpu0SAEwfWYlbumX1rSutSVdHR\nU2DsJ6nSGfBzOjvIH5M6tie5IMcqntWfV2pSccECgYEA8x5z900LK6pAzByFoBYr\n26ZcCfHtAjnU4+8ji+liOTBa9VSHIhlD7ycSw6sMkNHD3wKbAzkhbCOUhRQCTCql\n3VSy4eXshITz7RxyZo/J2dymzF0PqBn9lMuVW7yVz4VRzsKJjj/h17EEjZvcC3kS\nlRCKkmRH8/M7eLEPmbxIqcECgYEA4UbJu9Lo20u80t7Rh1yxjn4J09tlRRBQuVhv\nvXib4v1rAZ6dnkjG/MlsE4jcvX0fZPeZsZ9r7kNcw4yEPkUZLraLQ9kI9zHXqPTM\nl1bPtkCAF7XI5Lh8doWDs5kWSlr0ISG7RSiuOjeBCgCqIA/Fx+xCq4RMRsNX8PVI\n/6T9tPMCgYAxVpjKM0R1FBQaWB92IYm9BcHf8szaisn9h+Z62l4opPuQlhrmfKIg\nwpk4RFpEeY16kJjMyqdRvtbBOxJMSstmY236EiMxsZmfIQrGbZ/VKsZe6vPmdX/U\n1ov1FgyBFNlJUImB6Mz4bOAzrNG3MlbnEXhNxTQk+dOz5pr35BILAQKBgBjNAUKT\nSp1x7hzM+QZM9yM3zv8q5TBARpLRIKQcVhUcTx6Dhti5LGcCCcrww1R9JOqps5rx\ncSFu+xRwMNLmKoqRAC39A9aq/xITuT5kCUQIP9Hcanx7rwAhXMl17hVLhBrtqr9H\nZj70g1lFj3UuJ1kGMqTNUNRthw35AwtZ77BvAoGAYbMVcnvV/ihB8E03YhwltF5m\noiyN34WuO8kdvLpOSoEM04z1nDwfUGzD1+b+g7I6cSxUrt5Aec484xD9JnkmrBtd\nMb5gO/78nUMivQJs62Xywe75qgiuYiShVT2tr5PVqQlSlbA8XetSEsaQJTQ8TQQA\nPdHirw4BoBLj+NDDbck=\n-----END PRIVATE KEY-----\n",
+        "client_email": "cat304autistic@charged-kiln-411801.iam.gserviceaccount.com",
+        "client_id": "106054620295812792907",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cat304autistic%40charged-kiln-411801.iam.gserviceaccount.com",
+        "universe_domain": "googleapis.com"
+      }
+      ));
+    final authClient = await clientViaServiceAccount(
+      credentials,
+      [VisionApi.cloudVisionScope],
+    );
+    _visionApi = VisionApi(authClient);
   }
 
-  // Posts image to Google Cloud Vision API for face detection
-  Future<String> postVision(String base64Image) async {
-    // API url and key
-    String apiUrl = 'https://vision.googleapis.com/v1/images:annotate';
-    String apiKey = '75691527309-3r7guihu3fbq2oppen7jtcek2ne76sc3.apps.googleusercontent.com';
-    // Header
-    Map<String, String> headers = {'Content-Type': 'application/json'};
+  Future<String> detectFaces(File imageFile) async {
+    if (_visionApi == null) {
+      throw Exception('VisionApi not initialized. Call initialize() first.');
+    }
+    
+    final bytes = await imageFile.readAsBytes();
 
-    // Body
-    var body = json.encode({
-      "requests": [
-        {
-          "image": {
-            "content": base64Image
-          },
-          "features": [
-            {
-              "type": "FACE_DETECTION",
-              "maxResults": 10
-            }
-          ]
-        }
-      ]
-    });
 
-    // Make POST request
-    http.Response resp = await http.post(
-      Uri.parse('$apiUrl?key=$apiKey'),
-      headers: headers,
-      body: body,
+    final image = Image(content: base64.encode(bytes));
+    final request = AnnotateImageRequest(
+      image: image,
+      features: [Feature(type: 'FACE_DETECTION', maxResults: 10)],
+    );
+    
+    final response = await _visionApi!.images.annotate(
+      BatchAnnotateImagesRequest(requests: [request]),
     );
 
-    // Check for errors
-    if (resp.statusCode != 200) {
-      throw Exception('API request failed with status: ${resp.statusCode}');
+    final annotations = response.responses?.first.faceAnnotations;
+    if (annotations == null || annotations.isEmpty) {
+      throw Exception('No faces detected or an error occurred');
     }
 
-    // Process the response
-    var result = json.decode(resp.body);
-    if (result['responses'][0]['faceAnnotations'] != null) {
-      var faces = result['responses'][0]['faceAnnotations'];
-      String emotions = processFaces(faces);
-      return emotions;
-    } else {
-      throw Exception('No faces detected or an error occurred');
+    return processFaces(annotations);
+  }
+
+  String processFaces(List<FaceAnnotation> faces) {
+    final buffer = StringBuffer();
+    for (final face in faces) {
+      String dominantEmotion = getDominantEmotion(face);
+      buffer.writeln(dominantEmotion);
+    }
+    return buffer.toString();
+  }
+
+  Likelihood stringToLikelihood(String? likelihood) {
+    switch (likelihood) {
+      case 'VERY_UNLIKELY':
+        return Likelihood.VERY_UNLIKELY;
+      case 'UNLIKELY':
+        return Likelihood.UNLIKELY;
+      case 'POSSIBLE':
+        return Likelihood.POSSIBLE;
+      case 'LIKELY':
+        return Likelihood.LIKELY;
+      case 'VERY_LIKELY':
+        return Likelihood.VERY_LIKELY;
+      default:
+        return Likelihood.UNKNOWN;
     }
   }
 
-  // Processes the face annotations to extract emotion likelihoods and face bounds
-  String processFaces(List<dynamic> faces) {
-    const likelihoodName = [
-      "UNKNOWN",
-      "VERY_UNLIKELY",
-      "UNLIKELY",
-      "POSSIBLE",
-      "LIKELY",
-      "VERY_LIKELY",
-    ];
+  String getDominantEmotion(FaceAnnotation face) {
+    Map<String, Likelihood> emotions = {
+      "Anger": stringToLikelihood(face.angerLikelihood),
+      "Joy": stringToLikelihood(face.joyLikelihood),
+      "Surprise": stringToLikelihood(face.surpriseLikelihood),
+      "Sorrow": stringToLikelihood(face.sorrowLikelihood),
+    };
 
-    StringBuffer buffer = StringBuffer();
-    buffer.writeln("Faces:");
-    for (var face in faces) {
-      buffer.writeln("anger: ${likelihoodName[face['angerLikelihood']]}");
-      buffer.writeln("joy: ${likelihoodName[face['joyLikelihood']]}");
-      buffer.writeln("surprise: ${likelihoodName[face['surpriseLikelihood']]}");
+    String dominantEmotion = '';
+    Likelihood highestLikelihood = Likelihood.UNKNOWN;
 
+    emotions.forEach((emotion, likelihood) {
+      if (likelihood.index > highestLikelihood.index) {
+        dominantEmotion = emotion;
+        highestLikelihood = likelihood;
+      }
+    });
 
-      var vertices = face['boundingPoly']['vertices']
-          .map((v) => "(${v['x']},${v['y']})")
-          .join(",");
-      buffer.writeln("face bounds: $vertices");
-    }
-    return buffer.toString();
+    return dominantEmotion;
   }
 }

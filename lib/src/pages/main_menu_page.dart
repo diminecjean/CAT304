@@ -256,7 +256,7 @@ class _MainMenuPageState extends State<MainMenuPage> {
                 child: MenuCard(
                   title: 'Emotion Detection',
                   onTap: () {
-                    Navigator.pushNamed(context, "/Dashboard");
+                    Navigator.pushNamed(context, "/EmotionDetection");
                   },
                   imagePath:
                       'assets/images/menu_4_emotion_detection.png', // Replace with your asset image path
