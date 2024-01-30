@@ -29,6 +29,7 @@ class _QuestionCardState extends State<QuestionCard> {
       widget.question.options.length,
       (index) => Option(
         index: index,
+        // sequence: index,
         image: widget.question.optionImages[index],
         text: widget.question.options[index],
       ),
@@ -150,20 +151,20 @@ class _QuestionCardState extends State<QuestionCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 240, 154, 89)),
-                    elevation: MaterialStateProperty.all<double>(2),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                  ),
-                  onPressed: () => controller.reset(),
-                  child: const Text("Restart",
-                      style: TextStyle(color: Colors.white))),
+              // ElevatedButton(
+              //     style: ButtonStyle(
+              //       backgroundColor: MaterialStateProperty.all<Color>(
+              //           const Color.fromARGB(255, 240, 154, 89)),
+              //       elevation: MaterialStateProperty.all<double>(2),
+              //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              //         RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(10.0),
+              //         ),
+              //       ),
+              //     ),
+              //     onPressed: () => controller.reset(),
+              //     child: const Text("Restart",
+              //         style: TextStyle(color: Colors.white))),
               ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
@@ -179,13 +180,13 @@ class _QuestionCardState extends State<QuestionCard> {
                     if (!controller.isAnswered) {
                       controller.checkAns(widget.question, selectedSequence);
 
-                      Future.delayed(const Duration(seconds: 1), () {
-                        showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => _dialogBox(
-                                context,
-                                content: widget.question.explanation));
-                      });
+                      // Future.delayed(const Duration(seconds: 1), () {
+                      //   showDialog<String>(
+                      //       context: context,
+                      //       builder: (BuildContext context) => _dialogBox(
+                      //           context,
+                      //           content: widget.question.explanation));
+                      // });
                     }
                   },
                   child: const Text("Submit",
