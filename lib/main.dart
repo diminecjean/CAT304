@@ -97,7 +97,7 @@ class MyApp extends StatelessWidget {
         '/TaskSequencing': (BuildContext context) => const TaskSequencingPage(),
         '/PrioritySetting': (BuildContext context) =>
             const PrioritySettingPage(),
-        '/Dashboard': (BuildContext context) => const DashboardPage(),
+        '/Dashboard': (BuildContext context) => DashboardPage(userEmail: ""),
         '/EmotionDetection': (BuildContext context) =>
             const EmotionDetectionPage(),
         '/ParentMenu': (BuildContext context) => const ParentMenuPage(),
