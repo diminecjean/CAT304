@@ -29,7 +29,7 @@ class _QuestionCardState extends State<QuestionCard> {
       widget.question.options.length,
       (index) => Option(
         index: index,
-        // sequence: index,
+        sequence: index,
         image: widget.question.optionImages[index],
         text: widget.question.options[index],
       ),
