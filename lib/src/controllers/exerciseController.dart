@@ -72,7 +72,7 @@ abstract class ExerciseController<T> extends GetxController
     _isAnswered = false;
     _questionNumber.value = 1;
     _numOfCorrectAns = 0;
-    _pageController.jumpToPage(0);
+    _pageController = PageController();
   }
 
   int getAnswerIndex(T question);

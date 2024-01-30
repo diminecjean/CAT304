@@ -24,7 +24,7 @@ const List face_expression_exercise_question = [
     "explanation":
         "Fear and surprise facial expressions differ in eye widening, mouth movement, and eyebrow arch, crucial for distinguishing the emotions.",
     "options": ['Scared', 'Happy', 'Sad'],
-    "answer_index": 1,
+    "answer_index": 0,
   },
   {
     "id": 2,

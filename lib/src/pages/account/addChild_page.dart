@@ -93,44 +93,49 @@ class _AddChildPageState extends State<AddChildPage> {
               child: const Text('Add'),
             ),
             const Spacer(), // Pushes the below content to the bottom of the screen
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChildSignUpPage(
-                      fromPage: "parent",
-                    ),
+            Column(
+              children: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChildSignUpPage(
+                          fromPage: "parent",
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    "Your child don't have an account yet? Create one now!",
+                    style: TextStyle(color: primaryColor),
                   ),
-                );
-              },
-              child: const Text(
-                "Your child don't have an account yet? Create one now!",
-                style: TextStyle(color: primaryColor),
-              ),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.black,
-                backgroundColor: Colors.white, // Button text color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
                 ),
-                side: const BorderSide(color: Colors.orange), // Border color
-                minimumSize:
-                    const Size(double.infinity, 50), // Button width and height
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChildSignUpPage(
-                      fromPage: "parent",
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.white, // Button text color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
                     ),
+                    side:
+                        const BorderSide(color: Colors.orange), // Border color
+                    minimumSize: const Size(
+                        double.infinity, 50), // Button width and height
                   ),
-                );
-              },
-              child: const Text('Create Child Account'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChildSignUpPage(
+                          fromPage: "parent",
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('Create Child Account'),
+                ),
+              ],
             ),
           ],
         ),
@@ -154,7 +159,6 @@ class _AddChildPageState extends State<AddChildPage> {
       Navigator.pushNamed(context, "/ParentMenu");
     } else {
       Logger().e("Fail to add child");
-      showToast(message: "Fail to add child");
     }
 
     setState(() {

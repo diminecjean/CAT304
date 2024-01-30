@@ -78,10 +78,11 @@ class PrioritySettingExerciseController extends ExerciseController {
   @override
   void reset() {
     _isAnswered.value = false;
-    // _numOfCorrectAns = 0;
-    // _pageController.jumpToPage(0);
-    // _animationController.reset();
+    _questionNumber.value = 1;
+    _numOfCorrectAns.value = 0;
+    _pageController = PageController();
     update();
+    Logger().i("Priority Setting controller resetting");
   }
 
   @override

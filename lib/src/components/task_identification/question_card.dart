@@ -121,13 +121,6 @@ class QuestionCard extends StatelessWidget {
               onPressed: () {
                 if (!controller.isAnswered) {
                   controller.checkAns(question, selectedAns);
-
-                  Future.delayed(const Duration(seconds: 1), () {
-                    showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) =>
-                            _dialogBox(context, content: question.explanation));
-                  });
                 }
               },
               child: const Text(
