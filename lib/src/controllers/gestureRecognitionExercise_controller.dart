@@ -99,10 +99,11 @@ class GestureRecognitionExerciseController extends ExerciseController {
 
   @override
   void reset() {
-    _isAnswered = false as RxBool;
+    _isAnswered.value = false;
     _questionNumber.value = 1;
     _numOfCorrectAns.value = 0;
-    _pageController.jumpToPage(0);
+    _pageController = PageController();
+    Logger().i("Gesture Recognition controller resetting");
   }
 
   @override

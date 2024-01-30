@@ -232,8 +232,8 @@ class FirebaseAuthService {
     }
   }
 
-  Future<bool> removeChildFromParent(
-      String childEmail, String parentEmail) async {
+  // Future<bool>
+  removeChildFromParent(String childEmail, String parentEmail) async {
     var childQuery = await _firestore
         .collection('users')
         .where('email', isEqualTo: childEmail)
@@ -249,7 +249,7 @@ class FirebaseAuthService {
     if (childQuery.docs.isEmpty || parentQuery.docs.isEmpty) {
       Logger().e("no match in firestore");
       showToast(message: 'This child is not registered.');
-      return false;
+      // return false;
     }
     try {
       for (var doc in childQuery.docs) {
@@ -266,12 +266,12 @@ class FirebaseAuthService {
             .update({'child': FieldValue.delete()});
         Logger().i("removed child email from parent");
       }
-      return true;
+      // return true;
     } on FirebaseException catch (e) {
       Logger().e(
           'Firestore operation failed: ${e.code}\nError Message: ${e.message}');
-      showToast(message: "Error Message: ${e.message}");
-      return false;
+      showToast(message: 'This child is not registered.');
+      // return false;
     }
   }
 }

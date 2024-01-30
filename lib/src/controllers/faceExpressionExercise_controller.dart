@@ -104,7 +104,8 @@ class FaceExpressionExerciseController extends ExerciseController {
     _isAnswered.value = false;
     _questionNumber.value = 1;
     _numOfCorrectAns.value = 0;
-    _pageController.jumpToPage(0);
+    _pageController = PageController();
+    Logger().i("Face Expression controller resetting");
   }
 
   @override

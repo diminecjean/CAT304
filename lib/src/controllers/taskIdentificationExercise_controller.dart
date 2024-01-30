@@ -108,6 +108,16 @@ class TaskIdentificationExerciseController extends ExerciseController {
   }
 
   @override
+  void reset() {
+    _isAnswered.value = false;
+    _questionNumber.value = 1;
+    _numOfCorrectAns.value = 0;
+    _pageController = PageController();
+    Logger().i("Task Identification controller resetting");
+    update();
+  }
+
+  @override
   void updateTheQnNum(int index) {
     _questionNumber.value = index + 1;
   }

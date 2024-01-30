@@ -1,7 +1,9 @@
 import 'package:express_all/src/config/style/constants.dart';
+import 'package:express_all/src/services/auth/firebase_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:express_all/src/services/auth/firebase_auth.dart';
+import 'package:get/get.dart';
 
 // TODO: Have to let emotion button able to click and save something
 
@@ -14,6 +16,8 @@ class MainMenuPage extends StatefulWidget {
 
 class _MainMenuPageState extends State<MainMenuPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
+  String? selectedMood;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -153,10 +157,6 @@ class _MainMenuPageState extends State<MainMenuPage> {
                           }
                         },
                       ),
-                      const Text(
-                        'How are you feeling today?',
-                        style: TextStyle(fontSize: 14, color: primaryColor),
-                      ),
                     ],
                   ),
                   Image.asset(
@@ -166,23 +166,71 @@ class _MainMenuPageState extends State<MainMenuPage> {
                 ],
               ),
               const SizedBox(height: 20),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  EmotionButton(
-                      imagePath: 'assets/images/face_1_happy.png',
-                      color: Colors.lightGreen),
-                  EmotionButton(
-                      imagePath: 'assets/images/face_2_sad.png',
-                      color: Colors.yellow),
-                  EmotionButton(
-                      imagePath: 'assets/images/face_3_angry.png',
-                      color: Colors.redAccent),
-                  EmotionButton(
-                      imagePath: 'assets/images/face_4_normal.png',
-                      color: Colors.lightBlue),
-                ],
-              ),
+              Container(
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(68, 252, 252, 252),
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x1F4F4F4F),
+                        blurRadius: 10,
+                        offset: Offset(0, 5),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'How are you feeling today?',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: primaryColor),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          EmotionButton(
+                            imagePath: 'assets/images/face_1_happy.png',
+                            color: Colors.lightGreen,
+                            mood: "Happy",
+                            selectedMood: selectedMood,
+                            onSelect: (mood) =>
+                                setState(() => selectedMood = mood),
+                          ),
+                          EmotionButton(
+                            imagePath: 'assets/images/face_2_sad.png',
+                            color: Colors.yellow,
+                            mood: "Sad",
+                            selectedMood: selectedMood,
+                            onSelect: (mood) =>
+                                setState(() => selectedMood = mood),
+                          ),
+                          EmotionButton(
+                            imagePath: 'assets/images/face_3_angry.png',
+                            color: Colors.redAccent,
+                            mood: "Angry",
+                            selectedMood: selectedMood,
+                            onSelect: (mood) =>
+                                setState(() => selectedMood = mood),
+                          ),
+                          EmotionButton(
+                            imagePath: 'assets/images/face_4_normal.png',
+                            color: Colors.lightBlue,
+                            mood: "Normal",
+                            selectedMood: selectedMood,
+                            onSelect: (mood) =>
+                                setState(() => selectedMood = mood),
+                          ),
+                        ],
+                      )
+                    ],
+                  )),
               const SizedBox(height: 30, width: 100),
               Center(
                 child: MenuCard(
@@ -225,29 +273,45 @@ class _MainMenuPageState extends State<MainMenuPage> {
 class EmotionButton extends StatelessWidget {
   final String imagePath;
   final Color color;
+  final String mood;
+  final String? selectedMood;
+  final ValueChanged<String> onSelect;
 
   const EmotionButton({
     Key? key,
     required this.imagePath,
     required this.color,
+    required this.mood,
+    this.selectedMood,
+    required this.onSelect,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseFirestoreService _firestore = FirebaseFirestoreService();
+
     return GestureDetector(
       onTap: () {
-        // TODO: Add your tap handling logic here
+        // Update the selected mood
+        onSelect(mood);
+
+        // TODO: Add your tap handling logic
+        _firestore.updateUserMood(mood, DateTime.now());
       },
-      child: Column(
-        children: [
-          Image.asset(
-            imagePath,
-            width: 40, // Set the image width
-            height: 58, // Set the image height
-            fit: BoxFit
-                .cover, // Covers the area without changing the aspect ratio
-          ),
-        ],
+      child: Opacity(
+        // Dim the button if it's selected
+        opacity: selectedMood == mood ? 0.4 : 1,
+        child: Column(
+          children: [
+            Image.asset(
+              imagePath,
+              width: 40, // Set the image width
+              height: 58, // Set the image height
+              fit: BoxFit
+                  .cover, // Covers the area without changing the aspect ratio
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -67,8 +67,8 @@ class TaskSequencingExerciseController extends ExerciseController {
     _isAnswered.value = true;
     _correctAns = question.answer;
     _selectedAns = selectedSequence;
-    Logger().i(_correctAns);
-    Logger().i(_selectedAns);
+    Logger().i("Correct ans: $_correctAns");
+    Logger().i("Selected ans: $_selectedAns");
     Logger().i(listEquals(_correctAns, _selectedAns));
     if (listEquals(_correctAns, _selectedAns)) _numOfCorrectAns.value++;
     Logger().i(_numOfCorrectAns);
@@ -78,9 +78,10 @@ class TaskSequencingExerciseController extends ExerciseController {
   @override
   void reset() {
     _isAnswered.value = false;
-    // _numOfCorrectAns = 0;
-    // _pageController.jumpToPage(0);
-    // _animationController.reset();
+    _numOfCorrectAns.value = 0;
+    _questionNumber.value = 1;
+    _pageController = PageController();
+    Logger().i("Task Sequencing controller resetting");
     update();
   }
 

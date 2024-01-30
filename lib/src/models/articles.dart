@@ -28,7 +28,7 @@ const List articles = [
     "id": 2,
     "title": "Understanding Sensory Processing Disorder",
     "caption":
-        "Exploring the challenges and strategies for individuals with sensory processing disorder.",
+        "Exploring challenges and strategies for individuals with sensory processing disorder.",
     "image": "assets/images/autisticEvent3.jpg",
   },
 ];
