@@ -10,6 +10,7 @@ import 'package:express_all/src/services/auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ParentMenuPage extends StatefulWidget {
   const ParentMenuPage({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class _ParentMenuPageState extends State<ParentMenuPage> {
           title: question['title'],
           caption: question['caption'],
           image: question['image'],
+          url: question['url'],
         ),
       )
       .toList();
@@ -214,6 +216,40 @@ class _ParentMenuPageState extends State<ParentMenuPage> {
                                                         fontSize: 14,
                                                         fontWeight:
                                                             FontWeight.w400)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      foregroundColor:
+                                                          Colors.white,
+                                                      backgroundColor: Theme.of(
+                                                              context)
+                                                          .primaryColor, // Use white color for the button text
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                18.0), // Rounded corners for the button
+                                                      ),
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 32.0,
+                                                          vertical:
+                                                              12.0), // Padding inside the button
+                                                    ),
+                                                    child: const Text(
+                                                      '+   Add your child',
+                                                      style: TextStyle(
+                                                          fontSize: 16.0),
+                                                    ),
+                                                    onPressed: () {
+                                                      Navigator.pushNamed(
+                                                          context, '/AddChild');
+                                                    },
+                                                  ),
+                                                ),
                                               ],
                                             );
                                           } else {
@@ -255,7 +291,7 @@ class _ParentMenuPageState extends State<ParentMenuPage> {
                                                         child: Padding(
                                                           padding:
                                                               EdgeInsets.all(
-                                                                  8.0),
+                                                                  4.0),
                                                           child: Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -280,8 +316,8 @@ class _ParentMenuPageState extends State<ParentMenuPage> {
                                                                             Padding(
                                                                           padding: const EdgeInsets
                                                                               .symmetric(
-                                                                              vertical: 10,
-                                                                              horizontal: 20),
+                                                                              vertical: 5,
+                                                                              horizontal: 10),
                                                                           child:
                                                                               Column(
                                                                             mainAxisSize:
@@ -522,7 +558,7 @@ class _ArticlesPageViewState extends State<ArticlesPageView> {
                           fontWeight: FontWeight.w400),
                     ),
                     onTap: () {
-                      // Handle tap on this article
+                      _launchURL(item.url);
                     },
                   ),
                 ],
@@ -532,6 +568,18 @@ class _ArticlesPageViewState extends State<ArticlesPageView> {
         );
       },
     );
+  }
+
+  void _launchURL(String url) async {
+    Uri ssUrl = Uri.parse(url);
+    Logger().i(ssUrl);
+    if (await canLaunchUrlString("<$url>")) {
+      Logger().i('Launching url: $url');
+      await launchUrlString("<$url>");
+    } else {
+      Logger().e('Could not launch $url');
+      showToast(message: 'Could not launch $url');
+    }
   }
 }
 
