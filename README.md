@@ -25,7 +25,7 @@ flutter build apk
 more info: [Build and release an android app](https://docs.flutter.dev/deployment/android)
 
 ### Set up Flutter and Android Emulator with VSCode
-Refer here: [Flutter in VSC Guide.md](./Flutter in VSC Guide.md)
+Refer here: [Flutter in VSC Guide.md](Flutter%20in%20VSC%20Guide.md)
 
 ### Flutter project default
 #### Getting Started
