@@ -83,8 +83,8 @@ class UserInfoSection extends StatelessWidget {
         return "I'm feeling down..😢";
       case 'Angry':
         return "I'm kinda angry 😡";
-      case 'Neutral':
-        return "I'm feel normal as usual. 😀";
+      case 'Normal':
+        return "I feel neutral. 😀";
       default:
         return "I don't know how I'm feeling today...";
     }
@@ -98,7 +98,7 @@ class UserInfoSection extends StatelessWidget {
         return Color.fromARGB(255, 255, 229, 134);
       case 'Angry':
         return Color(0xFFE1847D);
-      case 'Neutral':
+      case 'Normal':
         return Color(0xFF86C9FF);
       default:
         return secondaryColor;
@@ -355,7 +355,7 @@ class MoodChartSection extends StatelessWidget {
             ),
             SizedBox(width: 20),
             FutureBuilder<double>(
-              future: _firestore.getMoodCount("Neutral", userEmail, startDate,
+              future: _firestore.getMoodCount("Normal", userEmail, startDate,
                   endDate), // your Future function
               builder: (BuildContext context, AsyncSnapshot<double> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -767,134 +767,132 @@ class _PracticeDetailsState extends State<PracticeDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text('Practice Details',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: primaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  )),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Practice Details',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: primaryColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              )),
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Brendan's Progress",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          )),
+                      Text("Practice Done 5/5",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 10,
+                          )),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  LinearPercentIndicator(
+                      width: 292.0,
+                      lineHeight: 18.0,
+                      percent: 1,
+                      // center: Text(
+                      //   "50.0%",
+                      //   style: TextStyle(fontSize: 12.0),
+                      // ),
+                      barRadius: Radius.circular(20),
+                      backgroundColor: Colors.grey,
+                      progressColor: dashboardOrange),
+                ],
+              ),
             ),
-            body: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Brendan's Progress",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              )),
-                          Text("Practice Done 5/5",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 10,
-                              )),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      LinearPercentIndicator(
-                          width: 292.0,
-                          lineHeight: 18.0,
-                          percent: 1,
-                          // center: Text(
-                          //   "50.0%",
-                          //   style: TextStyle(fontSize: 12.0),
-                          // ),
-                          barRadius: Radius.circular(20),
-                          backgroundColor: Colors.grey,
-                          progressColor: dashboardOrange),
+                      Text("National Average",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          )),
+                      Text("Practice Done 3/5",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 10,
+                          )),
                     ],
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("National Average",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              )),
-                          Text("Practice Done 3/5",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 10,
-                              )),
-                        ],
+                  const SizedBox(height: 10),
+                  LinearPercentIndicator(
+                      width: 292.0,
+                      lineHeight: 18.0,
+                      percent: 0.85,
+                      // center: Text(
+                      //   "50.0%",
+                      //   style: TextStyle(fontSize: 12.0),
+                      // ),
+                      barRadius: Radius.circular(20),
+                      backgroundColor: Colors.grey,
+                      progressColor: dashboardOrange),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text("Distribution of Answered Exercises",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: primaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                )),
+            const SizedBox(height: 10),
+            Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                child: SizedBox(
+                    height: 430,
+                    child: SfCircularChart(
+                      series: <CircularSeries>[
+                        PieSeries<ChartData, String>(
+                            dataSource: chartData,
+                            xValueMapper: (ChartData data, _) =>
+                                data.exerciseType,
+                            yValueMapper: (ChartData data, _) => data.count,
+                            dataLabelSettings: const DataLabelSettings(
+                              isVisible: true,
+                              labelPosition: ChartDataLabelPosition.inside,
+                              useSeriesColor: true,
+                            ),
+                            // Segments will explode on tap
+                            explode: true,
+                            // First segment will be exploded on initial rendering
+                            explodeIndex: 1)
+                      ],
+                      backgroundColor: const Color.fromARGB(46, 255, 255, 255),
+                      legend: Legend(
+                        isVisible: true,
+                        position: LegendPosition.bottom,
+                        orientation: LegendItemOrientation.vertical,
+                        height: '100',
                       ),
-                      const SizedBox(height: 10),
-                      LinearPercentIndicator(
-                          width: 292.0,
-                          lineHeight: 18.0,
-                          percent: 0.85,
-                          // center: Text(
-                          //   "50.0%",
-                          //   style: TextStyle(fontSize: 12.0),
-                          // ),
-                          barRadius: Radius.circular(20),
-                          backgroundColor: Colors.grey,
-                          progressColor: dashboardOrange),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text("Distribution of Answered Exercises",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: primaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    )),
-                const SizedBox(height: 10),
-                Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    child: SizedBox(
-                        height: 430,
-                        child: SfCircularChart(
-                          series: <CircularSeries>[
-                            PieSeries<ChartData, String>(
-                                dataSource: chartData,
-                                xValueMapper: (ChartData data, _) =>
-                                    data.exerciseType,
-                                yValueMapper: (ChartData data, _) => data.count,
-                                dataLabelSettings: const DataLabelSettings(
-                                  isVisible: true,
-                                  labelPosition: ChartDataLabelPosition.outside,
-                                  useSeriesColor: true,
-                                ),
-                                // Segments will explode on tap
-                                explode: true,
-                                // First segment will be exploded on initial rendering
-                                explodeIndex: 1)
-                          ],
-                          backgroundColor:
-                              const Color.fromARGB(46, 255, 255, 255),
-                          legend: Legend(
-                            isVisible: true,
-                            position: LegendPosition.bottom,
-                            orientation: LegendItemOrientation.vertical,
-                            height: '100',
-                          ),
-                        )))
-              ],
-            )));
+                    )))
+          ],
+        ));
   }
 }
 
