@@ -95,22 +95,22 @@ class _AddChildPageState extends State<AddChildPage> {
             const Spacer(), // Pushes the below content to the bottom of the screen
             Column(
               children: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChildSignUpPage(
-                          fromPage: "parent",
-                        ),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "Your child don't have an account yet? Create one now!",
-                    style: TextStyle(color: primaryColor),
-                  ),
-                ),
+                // TextButton(
+                //   onPressed: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => ChildSignUpPage(
+                //           fromPage: "parent",
+                //         ),
+                //       ),
+                //     );
+                //   },
+                //   child: const Text(
+                //     "Your child don't have an account yet? Create one now!",
+                //     style: TextStyle(color: primaryColor),
+                //   ),
+                // ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,
@@ -121,7 +121,7 @@ class _AddChildPageState extends State<AddChildPage> {
                     side:
                         const BorderSide(color: Colors.orange), // Border color
                     minimumSize: const Size(
-                        double.infinity, 50), // Button width and height
+                        double.infinity, 40), // Button width and height
                   ),
                   onPressed: () {
                     Navigator.push(
