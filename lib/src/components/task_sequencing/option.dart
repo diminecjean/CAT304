@@ -5,24 +5,19 @@ import 'package:logger/logger.dart';
 
 import '../../config/style/constants.dart';
 
-class Option extends StatefulWidget {
+class Option extends StatelessWidget {
   const Option({
     Key? key,
     required this.text,
     required this.image,
     required this.index,
-    required this.sequence,
+    // required this.sequence,
   }) : super(key: key);
   final String text;
   final String image;
   final int index;
-  final int sequence;
+  // final int sequence;
 
-  @override
-  _OptionState createState() => _OptionState();
-}
-
-class _OptionState extends State<Option> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<TaskSequencingExerciseController>(
@@ -32,14 +27,15 @@ class _OptionState extends State<Option> {
             if (qnController.isAnswered) {
               // Logger().i("sequence: $sequence, index: $index");
               Logger().i(
-                  "selectedAns ${widget.index}: ${qnController.selectedAns[widget.index]}");
+                  "selectedAns ${index}: ${qnController.selectedAns[index]}");
+              Logger()
+                  .i("correctAns ${index}: ${qnController.correctAns[index]}");
               Logger().i(
-                  "correctAns ${widget.index}: ${qnController.correctAns[widget.index]}");
+                  "Index ${index} : Compare ${qnController.correctAns[qnController.selectedAns[index]]}");
               Logger().i(
-                  "Index ${widget.index} : Compare ${qnController.correctAns[qnController.selectedAns[widget.index]]}");
-              Logger().i(
-                  "compared : ${qnController.correctAns[qnController.selectedAns[widget.index]] == widget.index}");
-              if (widget.index == qnController.correctAns[widget.sequence]) {
+                  "compared : ${qnController.correctAns[qnController.selectedAns[index]] == index}");
+              if (index ==
+                  qnController.correctAns[qnController.selectedAns[index]]) {
                 return greenColor;
               } else {
                 return redColor;
@@ -73,12 +69,12 @@ class _OptionState extends State<Option> {
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: Image.asset(
-                            widget.image,
+                            image,
                             height: 70,
                           ),
                         ),
                         Text(
-                          widget.text,
+                          text,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: getTheRightBorderColor() == secondaryColor
