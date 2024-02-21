@@ -309,11 +309,12 @@ class MoodChartSection extends StatelessWidget {
                     Logger().e('Error: ${snapshot.error}');
                     return Text('Error: ${snapshot.error}');
                   } else {
+                    Logger().i('Happy: ${snapshot.data}');
                     return VerticalBarIndicator(
                       width: 20,
                       height: 60,
-                      percent:
-                          snapshot.data!, // use the data from the Future here
+                      percent: snapshot.data! +
+                          0.3, // use the data from the Future here
                       header: '😁',
                       footer: 'Happy',
                       color: [
@@ -340,8 +341,8 @@ class MoodChartSection extends StatelessWidget {
                     return VerticalBarIndicator(
                       width: 20,
                       height: 60,
-                      percent:
-                          snapshot.data!, // use the data from the Future here
+                      percent: snapshot.data! +
+                          0.3, // use the data from the Future here
                       header: '😡',
                       footer: 'Angry',
                       color: [
@@ -368,7 +369,7 @@ class MoodChartSection extends StatelessWidget {
                     return VerticalBarIndicator(
                       width: 20,
                       height: 60,
-                      percent: snapshot.data!,
+                      percent: snapshot.data! + 0.3,
                       header: '😀',
                       footer: 'Neutral',
                       color: [
@@ -397,8 +398,8 @@ class MoodChartSection extends StatelessWidget {
                       height: 60,
                       header: '😢',
                       footer: 'Sad',
-                      percent:
-                          snapshot.data!, // use the data from the Future here
+                      percent: snapshot.data! +
+                          0.3, // use the data from the Future here
                       color: [
                         Color(0xC5FF5E00),
                         Color.fromARGB(197, 192, 81, 17)
