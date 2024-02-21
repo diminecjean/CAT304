@@ -55,7 +55,7 @@ class FirebaseFirestoreService {
     var userEmail = (await user)?.email;
     var username = (await user)?.displayName;
 
-    Logger().i(userEmail);
+    //Logger().i(userEmail);
 
     // Convert DateTime to Date (time set to midnight)
     DateTime dateOnly =
@@ -110,13 +110,13 @@ class FirebaseFirestoreService {
     Future<User?> user = getCurrentUser();
     var userEmail = (await user)?.email;
 
-    Logger().i(userEmail);
+    //Logger().i(userEmail);
 
     String dayOfWeek =
         DateFormat('EEEE').format(timestamp); // Get the day of the week
 
     try {
-      Logger().i('Storing score data in Firestore');
+      //Logger().i('Storing score data in Firestore');
       var docRef = await _firestore.collection('scores').add({
         'email': userEmail,
         'exerciseType': exerciseType,
@@ -127,7 +127,7 @@ class FirebaseFirestoreService {
         'dateTime': timestamp,
         'dayOfWeek': dayOfWeek, // Add the day of the week
       });
-      Logger().i('Score data stored in Firestore');
+      //Logger().i('Score data stored in Firestore');
 
       // Fetch the document that you just added
       var doc = await docRef.get();
@@ -161,12 +161,16 @@ class FirebaseFirestoreService {
       return 0.0; // Avoid division by zero
     }
 
+    //Logger().i('moodCount.size: ${moodCount.size}');
+    //Logger().i('totalMoodCount.size: ${totalMoodCount.size}');
+    //Logger().i(
+    // 'moodCount.size / totalMoodCount.size: ${moodCount.size / totalMoodCount.size}');
     return moodCount.size / totalMoodCount.size;
   }
 
   Future<double> getDailyAverageScore(String userEmail, Timestamp timestamp,
       String dayOfWeek, String exerciseType) async {
-    Logger().i('Starting getDailyAverageScore');
+    //Logger().i('Starting getDailyAverageScore');
     DateTime now = timestamp.toDate();
     int nowDayOfWeek = now.weekday; // Monday is 1, Sunday is 7
     List<String> daysOfWeek = [
@@ -190,11 +194,11 @@ class FirebaseFirestoreService {
         DateTime(targetDate.year, targetDate.month, targetDate.day, 0, 0, 0);
     DateTime endOfDay =
         DateTime(targetDate.year, targetDate.month, targetDate.day, 23, 59, 59);
-    Logger().i('Start of day: $startOfDay');
-    Logger().i('End of day: $endOfDay');
-    Logger().i('Fetching scores from Firestore');
-    Logger().i('User email: $userEmail');
-    Logger().i('Exercise type: $exerciseType');
+    //Logger().i('Start of day: $startOfDay');
+    //Logger().i('End of day: $endOfDay');
+    //Logger().i('Fetching scores from Firestore');
+    //Logger().i('User email: $userEmail');
+    //Logger().i('Exercise type: $exerciseType');
     QuerySnapshot<Map<String, dynamic>> snapshots = await _firestore
         .collection('scores')
         .where('email', isEqualTo: userEmail)
@@ -205,7 +209,7 @@ class FirebaseFirestoreService {
         .get();
 
     if (snapshots.docs.isEmpty) {
-      Logger().i('No snapshots found');
+      //Logger().i('No snapshots found');
       return 0.0; // Return 0 if no snapshots found
     }
 
@@ -217,18 +221,18 @@ class FirebaseFirestoreService {
     }
 
     if (count == 0) {
-      Logger().i('No snapshots found for the given day of week');
+      //Logger().i('No snapshots found for the given day of week');
       return 0.0; // Return 0 if no snapshots found for the given day of week
     }
 
     double averageScore = totalScore / count;
-    Logger().i('Average score: $averageScore');
+    //Logger().i('Average score: $averageScore');
     return averageScore;
   }
 
   Future<List<double>> getWeeklyAverageScores(
       String userEmail, Timestamp timestamp, String exerciseType) async {
-    Logger().i('Starting getWeeklyAverageScores');
+    //Logger().i('Starting getWeeklyAverageScores');
     DateTime now = timestamp.toDate();
     List<double> weeklyScores = [];
 
@@ -241,11 +245,11 @@ class FirebaseFirestoreService {
       DateTime endOfDay =
           DateTime(endOfWeek.year, endOfWeek.month, endOfWeek.day, 23, 59, 59);
 
-      Logger().i('Start of week: $startOfDay');
-      Logger().i('End of week: $endOfDay');
-      Logger().i('Fetching scores from Firestore');
-      Logger().i('User email: $userEmail');
-      Logger().i('Exercise type: $exerciseType');
+      //Logger().i('Start of week: $startOfDay');
+      //Logger().i('End of week: $endOfDay');
+      //Logger().i('Fetching scores from Firestore');
+      //Logger().i('User email: $userEmail');
+      //Logger().i('Exercise type: $exerciseType');
 
       QuerySnapshot<Map<String, dynamic>> snapshots = await _firestore
           .collection('scores')
@@ -257,7 +261,7 @@ class FirebaseFirestoreService {
           .get();
 
       if (snapshots.docs.isEmpty) {
-        Logger().i('No snapshots found for week $i');
+        //Logger().i('No snapshots found for week $i');
         weeklyScores.add(0.0); // Add 0 if no snapshots found for the week
         continue;
       }
@@ -270,13 +274,13 @@ class FirebaseFirestoreService {
       }
 
       if (count == 0) {
-        Logger().i('No snapshots found for week $i');
+        //Logger().i('No snapshots found for week $i');
         weeklyScores.add(0.0); // Add 0 if no snapshots found for the week
         continue;
       }
 
       double averageScore = totalScore / count;
-      Logger().i('Average score for week $i: $averageScore');
+      //Logger().i('Average score for week $i: $averageScore');
       weeklyScores.add(averageScore);
     }
 
@@ -285,7 +289,7 @@ class FirebaseFirestoreService {
 
   Future<List<double>> getMonthlyAverageScores(
       String userEmail, Timestamp timestamp, String exerciseType) async {
-    Logger().i('Starting getMonthlyAverageScores');
+    //Logger().i('Starting getMonthlyAverageScores');
     DateTime now = timestamp.toDate();
     List<double> monthlyScores = [];
 
@@ -293,11 +297,11 @@ class FirebaseFirestoreService {
       DateTime startOfMonth = DateTime(now.year, now.month - i, 1);
       DateTime endOfMonth = DateTime(now.year, now.month - i + 1, 0);
 
-      Logger().i('Start of month: $startOfMonth');
-      Logger().i('End of month: $endOfMonth');
-      Logger().i('Fetching scores from Firestore');
-      Logger().i('User email: $userEmail');
-      Logger().i('Exercise type: $exerciseType');
+      //Logger().i('Start of month: $startOfMonth');
+      //Logger().i('End of month: $endOfMonth');
+      //Logger().i('Fetching scores from Firestore');
+      //Logger().i('User email: $userEmail');
+      //Logger().i('Exercise type: $exerciseType');
 
       QuerySnapshot<Map<String, dynamic>> snapshots = await _firestore
           .collection('scores')
@@ -309,7 +313,7 @@ class FirebaseFirestoreService {
           .get();
 
       if (snapshots.docs.isEmpty) {
-        Logger().i('No snapshots found for month $i');
+        //Logger().i('No snapshots found for month $i');
         monthlyScores.add(0.0); // Add 0 if no snapshots found for the month
         continue;
       }
@@ -322,13 +326,13 @@ class FirebaseFirestoreService {
       }
 
       if (count == 0) {
-        Logger().i('No snapshots found for month $i');
+        //Logger().i('No snapshots found for month $i');
         monthlyScores.add(0.0); // Add 0 if no snapshots found for the month
         continue;
       }
 
       double averageScore = totalScore / count;
-      Logger().i('Average score for month $i: $averageScore');
+      //Logger().i('Average score for month $i: $averageScore');
       monthlyScores.add(averageScore);
     }
 
@@ -337,7 +341,7 @@ class FirebaseFirestoreService {
 
   Future<double> getExerciseAverageCount(
       String userEmail, String exerciseType) async {
-    Logger().i('Starting getExerciseAverageCount');
+    //Logger().i('Starting getExerciseAverageCount');
 
     QuerySnapshot<Map<String, dynamic>> exerciseSnapshots = await _firestore
         .collection('scores')
