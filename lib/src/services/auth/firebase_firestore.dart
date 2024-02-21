@@ -153,6 +153,8 @@ class FirebaseFirestoreService {
     QuerySnapshot totalMoodCount = await FirebaseFirestore.instance
         .collection('mood')
         .where('email', isEqualTo: userEmail)
+        .where('dateTime', isGreaterThanOrEqualTo: startDate)
+        .where('dateTime', isLessThanOrEqualTo: endDate)
         .get();
 
     if (totalMoodCount.docs.isEmpty) {
